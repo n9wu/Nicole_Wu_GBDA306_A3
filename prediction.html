@@ -95,18 +95,30 @@
       }
       .confidence-indicator {
         margin-top: 10px;
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 15px; /* 加大字号 */
+        font-weight: 800; /* 加粗 */
         color: #d35400;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 6px;
-        background: rgba(255, 244, 229, 0.8);
-        padding: 8px 14px;
+        background: #fff4e5;
+        border: 1px solid #ffe0b2; /* 加边框 */
+        padding: 10px 16px;
         border-radius: 22px;
         display: inline-flex;
+        box-shadow: 0 4px 10px rgba(211, 84, 0, 0.08); /* 加阴影让它凸显 */
       }
+      .icon-half {
+        font-size: 18px;
+      }
+
+      /* 在下面加上这个，美化“为什么是区间”的提示 */
+      .info-card p {
+        padding-left: 10px;
+        border-left: 3px solid #ff6b8b; /* 左侧加入红线强调 */
+      }
+
       .icon-half {
         font-size: 16px;
       }
@@ -245,7 +257,6 @@
     <div class="app">
       <div class="header">
         <a href="tracking.html">← Back</a>
-        <h1>Cycle Forecast</h1>
       </div>
       <div class="content">
         <div class="prediction-card">
