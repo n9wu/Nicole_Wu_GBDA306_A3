@@ -93,37 +93,66 @@
         font-weight: bold;
         margin: 12px 0;
       }
-      .confidence-indicator {
-        margin-top: 10px;
-        font-size: 15px; /* 加大字号 */
-        font-weight: 800; /* 加粗 */
-        color: #d35400;
+
+      /* 修订：带有 (i) 图标的置信度标签 */
+      .confidence-badge-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .confidence-indicator {
+        font-size: 14px;
+        font-weight: 800;
+        color: #d35400;
         background: #fff4e5;
-        border: 1px solid #ffe0b2; /* 加边框 */
-        padding: 10px 16px;
+        border: 1px solid #ffe0b2;
+        padding: 8px 14px;
         border-radius: 22px;
         display: inline-flex;
-        box-shadow: 0 4px 10px rgba(211, 84, 0, 0.08); /* 加阴影让它凸显 */
-      }
-      .icon-half {
-        font-size: 18px;
-      }
-
-      /* 在下面加上这个，美化“为什么是区间”的提示 */
-      .info-card p {
-        padding-left: 10px;
-        border-left: 3px solid #ff6b8b; /* 左侧加入红线强调 */
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 10px rgba(211, 84, 0, 0.08);
       }
 
-      .icon-half {
-        font-size: 16px;
+      /* 核心：信息图标按钮 */
+      .info-trigger {
+        width: 20px;
+        height: 20px;
+        background: #eee;
+        color: #666;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+      }
+      .info-trigger:hover {
+        background: #ddd;
+        color: #333;
       }
 
-      /* 新增：通用信息卡片样式 */
+      /* 解释说明文字（默认隐藏，配合 details/summary 或简单的层级） */
+      .explanation-panel {
+        background: #fdfdfd;
+        border: 1px dashed #ffb2c1;
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-size: 12px;
+        color: #777;
+        text-align: left;
+        line-height: 1.4;
+        display: none; /* 初始隐藏 */
+      }
+
+      /* 通用信息卡片样式 */
       .info-card {
         background: #ffffff;
         border-radius: 16px;
@@ -142,7 +171,12 @@
         gap: 6px;
       }
 
-      /* 新增：影响因素标签 */
+      .info-card p {
+        padding-left: 10px;
+        border-left: 3px solid #ff6b8b;
+      }
+
+      /* 影响因素标签 */
       .factors-container {
         display: flex;
         flex-wrap: wrap;
@@ -158,7 +192,7 @@
         font-weight: 500;
       }
 
-      /* 新增：历史周期图表 */
+      /* 历史周期图表 */
       .chart {
         display: flex;
         align-items: flex-end;
@@ -179,7 +213,6 @@
         background: rgba(255, 182, 193, 0.3);
         border-radius: 6px 6px 0 0;
         position: relative;
-        transition: height 0.3s;
       }
       .bar.current {
         background: #ff6b8b;
@@ -205,14 +238,12 @@
         padding: 15px;
         margin-top: 5px;
         border: 1px solid rgba(238, 238, 238, 0.9);
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
       }
       summary {
         font-size: 14px;
         font-weight: bold;
         color: #ff6b8b;
         cursor: pointer;
-        outline: none;
       }
       details p {
         font-size: 13px;
@@ -227,7 +258,6 @@
         padding: 12px 16px 22px 16px;
         border-top: 1px solid rgba(235, 235, 245, 0.9);
         background: #ffffff;
-        z-index: 2;
       }
       .nav a {
         text-decoration: none;
@@ -238,18 +268,12 @@
         flex-direction: column;
         align-items: center;
         gap: 4px;
-        transition: color 0.2s;
       }
       .nav a.active {
         color: #ff6b8b;
       }
       .nav a .icon {
         font-size: 22px;
-        filter: grayscale(100%) opacity(0.5);
-      }
-      .nav a.active .icon {
-        filter: none;
-        opacity: 1;
       }
     </style>
   </head>
@@ -257,21 +281,43 @@
     <div class="app">
       <div class="header">
         <a href="tracking.html">← Back</a>
+        <h1>Prediction Details</h1>
       </div>
+
       <div class="content">
         <div class="prediction-card">
           <div class="label">Expected Between</div>
           <div class="date-range">April 2 and April 5</div>
-          <div class="confidence-indicator">
-            <span class="icon-half">◐</span> Moderate Confidence
+
+          <div class="confidence-badge-wrapper">
+            <div class="confidence-indicator">
+              <span class="icon-half">◐</span> Moderate Confidence
+            </div>
+            <button class="info-trigger" onclick="toggleExp()">i</button>
+          </div>
+
+          <div id="expPanel" class="explanation-panel">
+            <strong>Why "Moderate"?</strong><br />
+            Your cycle data is consistent, but recent logs of
+            <em>High Stress</em> have added uncertainty to our prediction
+            algorithm.
           </div>
         </div>
 
         <div class="info-card">
           <div class="info-title">🔍 Factors Affecting This Range</div>
-          <p style="font-size: 12px; color: #666; margin: 0; line-height: 1.4">
-            You recently logged events that commonly cause hormonal fluctuations
-            and shift cycle lengths:
+          <p
+            style="
+              font-size: 12px;
+              color: #666;
+              margin: 0;
+              line-height: 1.4;
+              border: none;
+              padding-left: 0;
+            "
+          >
+            You recently logged events that commonly cause hormonal
+            fluctuations:
           </p>
           <div class="factors-container">
             <span class="factor-tag">✈️ Travel (Timezone change)</span>
@@ -281,9 +327,17 @@
 
         <div class="info-card">
           <div class="info-title">📊 Your Recent Cycle Lengths</div>
-          <p style="font-size: 12px; color: #666; margin: 0; line-height: 1.4">
-            Your last three cycles varied by 8 days, which is why we show a
-            range instead of a single date.
+          <p
+            style="
+              font-size: 12px;
+              color: #666;
+              margin: 0;
+              line-height: 1.4;
+              border: none;
+              padding-left: 0;
+            "
+          >
+            Your last three cycles varied by 8 days, leading to a wider range.
           </p>
 
           <div class="chart">
@@ -314,9 +368,8 @@
           <summary>How is this calculated?</summary>
           <p>
             This forecast is generated using the dates from your last 6 logged
-            cycles and your average luteal phase length. It places heavier
-            mathematical weight on your most recent cycle variations to adjust
-            the prediction window.
+            cycles and placing heavier mathematical weight on your most recent
+            cycle variations.
           </p>
         </details>
       </div>
@@ -333,5 +386,16 @@
         >
       </div>
     </div>
+
+    <script>
+      function toggleExp() {
+        var p = document.getElementById("expPanel");
+        if (p.style.display === "block") {
+          p.style.display = "none";
+        } else {
+          p.style.display = "block";
+        }
+      }
+    </script>
   </body>
 </html>
