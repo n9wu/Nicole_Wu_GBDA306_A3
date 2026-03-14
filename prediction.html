@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flo Mosaic - Predictions</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 107, 139, 0.25),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 182, 193, 0.22),
+            transparent 55%
+          ),
+          linear-gradient(180deg, #f5f2ff 0%, #f3f3f8 55%, #e0e0e0 100%);
+      }
+      .app {
+        width: 393px;
+        height: 852px;
+        max-width: 100vw;
+        max-height: 100vh;
+        background: #ffffff;
+        border-radius: 28px;
+        box-shadow:
+          0 18px 40px rgba(0, 0, 0, 0.12),
+          0 8px 18px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+      .header {
+        padding: 22px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(235, 235, 245, 0.9);
+        background: #ffffff;
+        z-index: 2;
+      }
+      .header a {
+        text-decoration: none;
+        color: #ff6b8b;
+        font-weight: 700;
+        margin-right: 15px;
+        font-size: 18px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 20px;
+        color: #333;
+      }
+      .content {
+        padding: 20px;
+        flex: 1;
+        overflow-y: auto;
+        background: #fafafa;
+      }
+
+      /* 顶部预测卡片 */
+      .prediction-card {
+        background: #ffffff;
+        border: 1px solid rgba(238, 238, 238, 0.9);
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+        margin-bottom: 20px;
+      }
+      .label {
+        font-size: 13px;
+        color: #888;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      .date-range {
+        font-size: 24px;
+        color: #ff6b8b;
+        font-weight: bold;
+        margin: 12px 0;
+      }
+      .confidence-indicator {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #d35400;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 244, 229, 0.8);
+        padding: 8px 14px;
+        border-radius: 22px;
+        display: inline-flex;
+      }
+      .icon-half {
+        font-size: 16px;
+      }
+
+      /* 新增：通用信息卡片样式 */
+      .info-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(238, 238, 238, 0.9);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+      }
+      .info-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* 新增：影响因素标签 */
+      .factors-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .factor-tag {
+        font-size: 12px;
+        background: rgba(240, 240, 245, 0.8);
+        color: #555;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-weight: 500;
+      }
+
+      /* 新增：历史周期图表 */
+      .chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 110px;
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #eee;
+        margin-top: 15px;
+      }
+      .bar-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .bar {
+        width: 36px;
+        background: rgba(255, 182, 193, 0.3);
+        border-radius: 6px 6px 0 0;
+        position: relative;
+        transition: height 0.3s;
+      }
+      .bar.current {
+        background: #ff6b8b;
+      }
+      .bar-label {
+        font-size: 12px;
+        color: #888;
+        font-weight: 500;
+      }
+      .bar-value {
+        font-size: 11px;
+        font-weight: bold;
+        position: absolute;
+        top: -20px;
+        width: 100%;
+        text-align: center;
+        color: #555;
+      }
+
+      details {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 5px;
+        border: 1px solid rgba(238, 238, 238, 0.9);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+      }
+      summary {
+        font-size: 14px;
+        font-weight: bold;
+        color: #ff6b8b;
+        cursor: pointer;
+        outline: none;
+      }
+      details p {
+        font-size: 13px;
+        color: #555;
+        line-height: 1.5;
+        margin: 10px 0 0 0;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 16px 22px 16px;
+        border-top: 1px solid rgba(235, 235, 245, 0.9);
+        background: #ffffff;
+        z-index: 2;
+      }
+      .nav a {
+        text-decoration: none;
+        color: #aaa;
+        font-size: 11px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+      .nav a.active {
+        color: #ff6b8b;
+      }
+      .nav a .icon {
+        font-size: 22px;
+        filter: grayscale(100%) opacity(0.5);
+      }
+      .nav a.active .icon {
+        filter: none;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="header">
+        <a href="index.html">← Back</a>
+        <h1>Cycle Forecast</h1>
+      </div>
+      <div class="content">
+        <div class="prediction-card">
+          <div class="label">Expected Between</div>
+          <div class="date-range">April 2 and April 5</div>
+          <div class="confidence-indicator">
+            <span class="icon-half">◐</span> Moderate Confidence
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-title">🔍 Factors Affecting This Range</div>
+          <p style="font-size: 12px; color: #666; margin: 0; line-height: 1.4">
+            You recently logged events that commonly cause hormonal fluctuations
+            and shift cycle lengths:
+          </p>
+          <div class="factors-container">
+            <span class="factor-tag">✈️ Travel (Timezone change)</span>
+            <span class="factor-tag">😟 High Stress</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-title">📊 Your Recent Cycle Lengths</div>
+          <p style="font-size: 12px; color: #666; margin: 0; line-height: 1.4">
+            Your last three cycles varied by 8 days, which is why we show a
+            range instead of a single date.
+          </p>
+
+          <div class="chart">
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 50%">
+                <div class="bar-value">26d</div>
+              </div>
+              <span class="bar-label">Jan</span>
+            </div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 90%">
+                <div class="bar-value">34d</div>
+              </div>
+              <span class="bar-label">Feb</span>
+            </div>
+            <div class="bar-wrapper">
+              <div class="bar current" style="height: 65%">
+                <div class="bar-value" style="color: #ff6b8b">29d</div>
+              </div>
+              <span class="bar-label" style="color: #ff6b8b; font-weight: bold"
+                >Mar</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <details>
+          <summary>How is this calculated?</summary>
+          <p>
+            This forecast is generated using the dates from your last 6 logged
+            cycles and your average luteal phase length. It places heavier
+            mathematical weight on your most recent cycle variations to adjust
+            the prediction window.
+          </p>
+        </details>
+      </div>
+
+      <div class="nav">
+        <a href="index.html" class="active"
+          ><span class="icon">🌸</span><span>Today</span></a
+        >
+        <a href="library.html"
+          ><span class="icon">📖</span><span>Library</span></a
+        >
+        <a href="privacy.html"
+          ><span class="icon">⚙️</span><span>Settings</span></a
+        >
+      </div>
+    </div>
+  </body>
+</html>
