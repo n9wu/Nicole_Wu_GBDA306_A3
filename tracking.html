@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flo Mosaic - Home</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 107, 139, 0.25),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 182, 193, 0.22),
+            transparent 55%
+          ),
+          linear-gradient(180deg, #f5f2ff 0%, #f3f3f8 55%, #e0e0e0 100%);
+      }
+      .app {
+        width: 393px;
+        height: 852px;
+        max-width: 100vw;
+        max-height: 100vh;
+        background: #ffffff;
+        border-radius: 28px;
+        box-shadow:
+          0 18px 40px rgba(0, 0, 0, 0.12),
+          0 8px 18px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* --- 新增：复刻原版 Flo 的周视图日历 --- */
+      .calendar-header {
+        padding: 20px 20px 5px 20px;
+        background: transparent; /* 让底层背景透过来，模拟渐变感 */
+        z-index: 2;
+      }
+      .cal-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .cal-avatar {
+        font-size: 26px;
+      }
+      .cal-month {
+        font-size: 17px;
+        font-weight: 600;
+        color: #333;
+      }
+      .cal-icon-btn {
+        font-size: 22px;
+        color: #333;
+      }
+
+      .cal-week {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-bottom: 5px;
+        border-bottom: 1px solid rgba(235, 235, 245, 0.9);
+      }
+      .cal-day {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+      }
+      .cal-day .weekday {
+        font-size: 10px;
+        color: #999;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .cal-day .date {
+        font-size: 16px;
+        color: #e59b8b;
+        font-weight: 500;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.2s;
+      }
+      /* 今天日期的特殊高亮样式 */
+      .cal-day.active .today-label {
+        position: absolute;
+        top: -16px;
+        font-size: 9px;
+        font-weight: 800;
+        color: #333;
+        letter-spacing: 0.5px;
+      }
+      .cal-day.active .date {
+        background: #ffffff;
+        color: #ff6b8b;
+        font-weight: 700;
+        font-size: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+      /* ------------------------------------- */
+
+      .content {
+        padding: 15px 20px;
+        flex: 1;
+        overflow-y: auto;
+        background: #fafafa;
+      }
+
+      .focus-mode-badge {
+        background: rgba(227, 242, 253, 0.8);
+        color: #1565c0;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 6px 12px;
+        border-radius: 12px;
+        text-align: center;
+        letter-spacing: 0.5px;
+      }
+
+      .phase-ring {
+        width: 200px;
+        height: 200px;
+        border: 12px solid rgba(255, 238, 242, 0.9);
+        border-top-color: #ff6b8b;
+        border-radius: 50%;
+        margin: 20px auto 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        text-align: center;
+        padding: 10px;
+      }
+      .phase-title {
+        font-size: 13px;
+        color: #777;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .phase-name {
+        font-size: 25px;
+        color: #ff6b8b;
+        font-weight: bold;
+        margin: 6px 0;
+      }
+      .phase-desc {
+        font-size: 10px;
+        color: #555;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      .symptom-card {
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 16px;
+        margin-top: 15px;
+        border-left: 4px solid #ff6b8b;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      }
+      .symptom-card h3 {
+        margin: 0 0 8px 0;
+        font-size: 15px;
+        color: #333;
+      }
+      .symptom-card p {
+        margin: 0;
+        font-size: 13px;
+        color: #555;
+        line-height: 1.5;
+      }
+
+      details.more-insights {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 15px;
+        margin-top: 15px;
+        border: 1px dashed rgba(200, 200, 210, 0.9);
+        text-align: center;
+      }
+      details.more-insights summary {
+        font-size: 13px;
+        font-weight: bold;
+        color: #888;
+        cursor: pointer;
+        outline: none;
+        list-style: none;
+      }
+      details.more-insights summary::-webkit-details-marker {
+        display: none;
+      }
+      details.more-insights p {
+        font-size: 13px;
+        color: #555;
+        margin: 10px 0 0 0;
+        text-align: left;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+      }
+
+      .privacy-card {
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 16px;
+        margin-top: 15px;
+        border: 1px solid rgba(238, 238, 238, 0.9);
+      }
+      .privacy-card h3 {
+        margin: 0 0 10px 0;
+        font-size: 13px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .privacy-card p {
+        margin: 0 0 12px 0;
+        font-size: 12px;
+        color: #666;
+        line-height: 1.5;
+      }
+      .btn-delete {
+        background: #ffffff;
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.7);
+        padding: 10px 14px;
+        border-radius: 18px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+      .btn-delete:hover {
+        background: rgba(255, 237, 239, 0.9);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 16px 22px 16px;
+        border-top: 1px solid rgba(235, 235, 245, 0.9);
+        background: #ffffff;
+        z-index: 2;
+      }
+      .nav a {
+        text-decoration: none;
+        color: #aaa;
+        font-size: 11px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+      .nav a.active {
+        color: #ff6b8b;
+      }
+      .nav a .icon {
+        font-size: 22px;
+        filter: grayscale(100%) opacity(0.5);
+      }
+      .nav a.active .icon {
+        filter: none;
+        opacity: 1;
+      }
+
+      /* Floating action button + modal */
+      .fab {
+        position: absolute;
+        right: 20px;
+        bottom: 90px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff6b8b, #ff8fc3);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 12px 24px rgba(255, 107, 139, 0.35);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .fab:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 28px rgba(255, 107, 139, 0.4);
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0 20px 20px;
+        z-index: 50;
+      }
+      .modal-backdrop.active {
+        display: flex;
+      }
+
+      .modal {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+        padding: 22px;
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .modal-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 800;
+        color: #333;
+      }
+      .modal-close {
+        background: rgba(0, 0, 0, 0.05);
+        border: none;
+        border-radius: 12px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        color: #666;
+      }
+      .modal-close:hover {
+        background: rgba(0, 0, 0, 0.08);
+      }
+      .modal-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+      .modal-item {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(238, 238, 238, 0.9);
+        padding: 14px 16px;
+        border-radius: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .modal-item:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+      }
+      .modal-item span {
+        font-size: 14px;
+        font-weight: 700;
+        color: #333;
+      }
+      .modal-item .meta {
+        font-size: 12px;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="calendar-header">
+        <div class="cal-top">
+          <div class="cal-avatar">🌸</div>
+          <div class="cal-month">December 17</div>
+          <div class="cal-icon-btn">📅</div>
+        </div>
+        <div class="cal-week">
+          <div class="cal-day">
+            <span class="weekday">M</span><span class="date">12</span>
+          </div>
+          <div class="cal-day">
+            <span class="weekday">T</span><span class="date">13</span>
+          </div>
+          <div class="cal-day">
+            <span class="weekday">W</span><span class="date">14</span>
+          </div>
+          <div class="cal-day">
+            <span class="weekday">T</span><span class="date">15</span>
+          </div>
+          <div class="cal-day">
+            <span class="weekday">F</span><span class="date">16</span>
+          </div>
+          <div class="cal-day active">
+            <span class="today-label">TODAY</span><span class="date">17</span>
+          </div>
+          <div class="cal-day">
+            <span class="weekday">S</span><span class="date">18</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+          "
+        >
+          <div class="focus-mode-badge" style="margin: 0">
+            ✨ Calm Summary Mode Active
+          </div>
+          <a
+            href="prediction.html"
+            style="
+              color: #ff6b8b;
+              font-size: 13px;
+              font-weight: bold;
+              text-decoration: none;
+            "
+            >Forecast ➔</a
+          >
+        </div>
+
+        <div class="phase-ring">
+          <span class="phase-title">Current Phase</span>
+          <span class="phase-name">Luteal</span>
+          <span
+            class="phase-title"
+            style="color: #333; font-weight: bold; margin: 5px 0"
+            >~5 Days to Period</span
+          >
+          <span class="phase-desc"
+            >Expect natural energy dips as your body prepares to rest.</span
+          >
+        </div>
+
+        <div class="symptom-card">
+          <h3>📝 You logged: Fatigue</h3>
+          <p>
+            <strong>Phase Connection:</strong> Progesterone peaks during the
+            luteal phase, which naturally increases tiredness.
+          </p>
+        </div>
+
+        <details class="more-insights">
+          <summary>Tap to expand other daily insights ▼</summary>
+          <p>
+            💧 <strong>Hydration:</strong> Drink 2L of water to reduce bloating.
+          </p>
+          <p>
+            🧘‍♀️ <strong>Activity:</strong> Gentle yoga or stretching is highly
+            recommended for this phase.
+          </p>
+        </details>
+
+        <div class="privacy-card">
+          <h3>🛡️ Privacy Status</h3>
+          <p>
+            <strong>Stored:</strong> Locally on device.<br /><strong
+              >Shared:</strong
+            >
+            No third parties.
+          </p>
+          <a
+            href="#"
+            class="btn-delete"
+            onclick="alert('Step 1 of 2: Confirm deletion of all cycle data?')"
+            >Delete My Data (2 Clicks)</a
+          >
+        </div>
+      </div>
+
+      <div class="fab" id="fab" aria-label="Add entry" title="Add entry">+</div>
+
+      <div
+        class="modal-backdrop"
+        id="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <div class="modal">
+          <div class="modal-header">
+            <h3 id="modal-title">Quick log</h3>
+            <button
+              class="modal-close"
+              id="modalClose"
+              aria-label="Close"
+              title="Close"
+            >
+              ✕
+            </button>
+          </div>
+          <ul class="modal-list">
+            <li class="modal-item" data-action="log-symptom">
+              <div>
+                <span>Log symptom</span>
+                <div class="meta">Add today’s mood or symptom</div>
+              </div>
+              <span>📝</span>
+            </li>
+            <li class="modal-item" data-action="log-period">
+              <div>
+                <span>Log period</span>
+                <div class="meta">Mark period start/end</div>
+              </div>
+              <span>🩸</span>
+            </li>
+            <li class="modal-item" data-action="log-note">
+              <div>
+                <span>Journal note</span>
+                <div class="meta">Quick note about your day</div>
+              </div>
+              <span>🖊️</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a href="index.html" class="active"
+          ><span class="icon">🌸</span><span>Today</span></a
+        >
+        <a href="library.html"
+          ><span class="icon">📖</span><span>Library</span></a
+        >
+        <a href="privacy.html"
+          ><span class="icon">⚙️</span><span>Settings</span></a
+        >
+      </div>
+    </div>
+
+    <script>
+      const fab = document.getElementById("fab");
+      const modal = document.getElementById("modal");
+      const modalClose = document.getElementById("modalClose");
+
+      const openModal = () => modal.classList.add("active");
+      const closeModal = () => modal.classList.remove("active");
+
+      fab.addEventListener("click", openModal);
+      modalClose.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+
+      document.querySelectorAll(".modal-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const action = item.dataset.action;
+          closeModal();
+          alert(`(Mock) ${action.replace("-", " ")} opened.`);
+        });
+      });
+    </script>
+  </body>
+</html>
