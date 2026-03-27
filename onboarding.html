@@ -41,8 +41,8 @@
           0 8px 18px rgba(0, 0, 0, 0.08);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 34px 28px;
+        justify-content: flex-start; /* 改为从上往下排列 */
+        padding: 60px 28px 34px 28px;
         position: relative;
         overflow: hidden;
         animation: fadeIn 0.9s ease;
@@ -62,43 +62,86 @@
         text-align: center;
         color: #6a6a6a;
         font-size: 15px;
-        margin-bottom: 36px;
+        margin-bottom: 30px;
       }
+
+      /* 新增：价值声明卡片 (Value Signal) */
+      .value-signal {
+        background: #fff5f7;
+        border: 1px solid #ffdae1;
+        padding: 16px;
+        border-radius: 14px;
+        margin-bottom: 24px;
+        font-size: 13px;
+        color: #d64a67;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       .choice-card {
         display: block;
         background: #ffffff;
         border: 1px solid rgba(238, 238, 238, 0.9);
-        padding: 20px;
-        border-radius: 18px;
-        margin-bottom: 18px;
+        padding: 22px;
+        border-radius: 22px;
+        margin-bottom: 20px;
         text-decoration: none;
         transition:
           transform 0.2s ease,
+          border-color 0.2s ease,
           box-shadow 0.2s ease;
-        box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
       }
       .choice-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 28px rgba(0, 0, 0, 0.12);
+        transform: translateY(-3px);
+        border-color: #ffb6c1;
+        box-shadow: 0 16px 28px rgba(255, 107, 139, 0.15);
       }
       .choice-card h2 {
         color: #ff6b8b;
-        font-size: 18px;
-        margin: 0 0 8px 0;
+        font-size: 19px;
+        margin: 0 0 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
       .choice-card p {
         color: #555;
-        font-size: 13px;
+        font-size: 14px;
         margin: 0;
-        line-height: 1.4;
-      }
-      .privacy-note {
-        text-align: center;
-        font-size: 12px;
-        color: #999;
-        margin-top: 18px;
         line-height: 1.5;
       }
+
+      /* 针对 S2 增加的显性化标签 */
+      .badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 6px;
+        margin-top: 10px;
+      }
+      .badge-privacy {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .badge-trust {
+        background: #e3f2fd;
+        color: #1565c0;
+      }
+
+      .privacy-note {
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+        margin-top: auto; /* 置底 */
+        padding: 20px 0;
+        border-top: 1px dashed #eee;
+        line-height: 1.6;
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -114,23 +157,40 @@
   <body>
     <div class="app">
       <div class="logo">Flo Health</div>
-      <p class="subtitle">Personalize your experience.</p>
+      <p class="subtitle">Ethical care for your cycle journey.</p>
+
+      <div class="value-signal">
+        <span>🛡️</span>
+        <div>
+          <strong>Your Data, Your Choice</strong><br />
+          Select how you want to interact with us.
+        </div>
+      </div>
+
       <a href="tracking.html" class="choice-card">
         <h2>📅 Track My Cycle</h2>
         <p>
-          Get personalized, data-driven insights and predictions to understand
-          your body's rhythm.
+          Receive evidence-based predictions with clear
+          <strong>Honesty</strong> regarding accuracy. For users seeking
+          reassurance through data.
         </p>
+        <span class="badge badge-trust">Personalized Experience</span>
       </a>
+
       <a href="library.html" class="choice-card">
-        <h2>📚 Explore Health Library</h2>
+        <h2>📚 Explore Library</h2>
         <p>
-          Read evidence-based articles freely. No tracking required, no data
-          collected.
+          Access all medical content anonymously.
+          <strong>No tracking required</strong>—perfect for private health
+          education.
         </p>
+        <span class="badge badge-privacy">Full Anonymity</span>
       </a>
+
       <div class="privacy-note">
-        🔒 You can change your mode in Settings at any time.
+        🔒 <strong>Flexible Ownership:</strong><br />
+        You can transition between tracking and library-only modes in Settings
+        at any time. [cite: 89]
       </div>
     </div>
   </body>
