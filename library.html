@@ -22,11 +22,6 @@
             rgba(255, 107, 139, 0.25),
             transparent 55%
           ),
-          radial-gradient(
-            circle at 80% 80%,
-            rgba(255, 182, 193, 0.22),
-            transparent 55%
-          ),
           linear-gradient(180deg, #f5f2ff 0%, #f3f3f8 55%, #e0e0e0 100%);
       }
       .app {
@@ -56,27 +51,34 @@
       }
 
       .header {
-        padding: 25px 20px 15px;
+        padding: 20px 20px 15px;
         background: #ffffff;
         border-bottom: 1px solid #eee;
       }
       .header h1 {
-        margin: 0 0 8px 0;
+        margin: 0 0 12px 0;
         font-size: 24px;
         color: #333;
         font-weight: 800;
       }
 
-      /* --- NEW: Honesty 核心引导语 --- */
-      .meta-intro {
-        font-size: 11px;
-        color: #888;
-        background: #fdfdfd;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px dashed #ddd;
+      /* --- Honesty: 使命声明 (S2) --- */
+      .mission-statement {
+        font-size: 12px;
+        color: #444;
+        background: #fafafa;
+        padding: 14px;
+        border-radius: 12px;
+        border-left: 4px solid #ff6b8b;
         margin-bottom: 15px;
-        line-height: 1.4;
+        line-height: 1.5;
+      }
+      .mission-statement strong {
+        color: #ff6b8b;
+        text-transform: uppercase;
+        font-size: 10px;
+        display: block;
+        margin-bottom: 4px;
       }
 
       .search-bar {
@@ -101,16 +103,15 @@
         white-space: nowrap;
         padding: 8px 14px;
         background: #f0f0f0;
-        border-radius: 12px;
+        border-radius: 10px;
         font-size: 11px;
         font-weight: 700;
         color: #666;
-        border: 1px solid transparent;
       }
       .filter-chip.active {
         background: #fff0f3;
         color: #ff6b8b;
-        border-color: #ff6b8b;
+        border: 1px solid #ff6b8b;
       }
 
       .content {
@@ -128,11 +129,8 @@
         margin-bottom: 15px;
         text-decoration: none;
         display: block;
-        transition: transform 0.2s;
+        transition: 0.2s;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-      }
-      .article-card:hover {
-        transform: translateY(-2px);
       }
 
       .evidence-badge {
@@ -142,7 +140,7 @@
         font-size: 9px;
         font-weight: 800;
         text-transform: uppercase;
-        padding: 4px 10px;
+        padding: 4px 8px;
         border-radius: 6px;
         margin-bottom: 10px;
       }
@@ -173,7 +171,7 @@
         margin-bottom: 12px;
       }
 
-      /* --- NEW: Honesty 变异性说明 --- */
+      /* --- Honesty: 承认不确定性 (S2) --- */
       .honesty-marker {
         font-size: 10px;
         color: #d35400;
@@ -215,7 +213,6 @@
       }
       .nav a .icon {
         font-size: 22px;
-        margin-bottom: 2px;
         filter: grayscale(100%) opacity(0.5);
       }
       .nav a.active .icon {
@@ -233,11 +230,13 @@
 
       <div class="header">
         <h1>Health Library</h1>
-        <p class="meta-intro">
-          <strong>Transparency Note:</strong> Not all health information is
-          equally certain. We label each article so you can understand its
-          limits.
-        </p>
+
+        <div class="mission-statement">
+          <strong>Our Commitment to Honesty</strong>
+          We will never present guesses as facts. Every article tells you what
+          we know, what we think, and what we don't know yet.
+        </div>
+
         <input
           type="text"
           class="search-bar"
@@ -263,7 +262,7 @@
             a single fixed date.
           </p>
           <span class="honesty-marker"
-            >⚠️ Note: Common, but varies between individuals.</span
+            >Note: Common, but varies between individuals.</span
           >
           <div class="card-meta">
             <span style="color: #1565c0">✓ Licensed OB-GYN Reviewed</span>
@@ -281,8 +280,7 @@
             biological rhythm.
           </p>
           <span class="honesty-marker"
-            >⚠️ Note: Findings are still evolving; individual results
-            vary.</span
+            >Note: Findings are still evolving; individual results vary.</span
           >
           <div class="card-meta">
             <span>Evidence-based</span>
@@ -292,7 +290,7 @@
 
         <a href="#" class="article-card">
           <span class="evidence-badge type-community"
-            >💬 Lived Experience (User Reported)</span
+            >💬 Lived Experience (User-reported)</span
           >
           <h3 class="card-title">Managing Energy Without Daily Tracking</h3>
           <p class="card-desc">
@@ -300,7 +298,7 @@
             community members.
           </p>
           <span class="honesty-marker"
-            >⚠️ Note: Based on personal accounts; not clinical advice.</span
+            >Note: Based on personal accounts; not clinical advice.</span
           >
           <div class="card-meta">
             <span>Verified Experience</span>

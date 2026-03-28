@@ -22,11 +22,6 @@
             rgba(255, 107, 139, 0.25),
             transparent 55%
           ),
-          radial-gradient(
-            circle at 80% 80%,
-            rgba(255, 182, 193, 0.22),
-            transparent 55%
-          ),
           linear-gradient(180deg, #f5f2ff 0%, #f3f3f8 55%, #e0e0e0 100%);
       }
       .app {
@@ -51,7 +46,6 @@
         font-weight: 700;
         font-size: 14px;
       }
-
       .content {
         padding: 0;
         flex: 1;
@@ -59,15 +53,16 @@
         background: #fff;
       }
 
-      /* [1] 强制免责声明 - Honesty 信号 */
-      .disclaimer {
-        background: #fef9c3;
-        color: #854d0e;
-        font-size: 10px;
-        padding: 10px 20px;
-        text-align: center;
-        font-weight: 600;
-        border-bottom: 1px solid #fde68a;
+      /* [Honesty] 诚实的边界声明 */
+      .honesty-disclaimer {
+        background: #fffbeb;
+        color: #92400e;
+        font-size: 11px;
+        padding: 12px 20px;
+        text-align: left;
+        font-weight: 500;
+        border-bottom: 1px solid #fef3c7;
+        line-height: 1.4;
       }
 
       .article-body {
@@ -80,8 +75,6 @@
         line-height: 1.2;
         margin-bottom: 8px;
       }
-
-      /* 元诚实说明 */
       .meta-honesty {
         font-size: 10px;
         color: #999;
@@ -89,7 +82,6 @@
         font-style: italic;
       }
 
-      /* 整合后的透明度面板 */
       .reliability-card {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
@@ -130,7 +122,7 @@
         font-weight: 600;
       }
 
-      /* [2] 升级点：知与不知对比区 (决定 Grade 的关键) */
+      /* [Honesty] 知与不知对比区 */
       .knowledge-split {
         background: #fdf2f8;
         border-radius: 16px;
@@ -143,11 +135,6 @@
         color: #be185d;
         margin-bottom: 12px;
         display: block;
-      }
-      .split-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 15px;
       }
       .split-col h5 {
         margin: 0 0 5px 0;
@@ -162,7 +149,7 @@
         line-height: 1.4;
       }
 
-      /* [5] Wellbeing 情感验证 */
+      /* [Wellbeing] 情感验证 */
       .reassurance-note {
         border-left: 4px solid #ff6b8b;
         background: #fff5f6;
@@ -171,6 +158,47 @@
         font-size: 13px;
         color: #d64a67;
         line-height: 1.5;
+      }
+
+      /* [NEW] 双向诚实反馈模块 (S2) */
+      .feedback-box {
+        background: #f9fafb;
+        border: 1px solid #eee;
+        border-radius: 16px;
+        padding: 20px;
+        margin: 30px 20px;
+        text-align: center;
+      }
+      .feedback-box span {
+        font-size: 14px;
+        font-weight: 700;
+        color: #333;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .f-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .f-btn {
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        background: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .f-btn:active {
+        background: #fff0f3;
+        border-color: #ff6b8b;
+        color: #ff6b8b;
+      }
+      .community-stat {
+        font-size: 10px;
+        color: #999;
+        margin-top: 12px;
       }
 
       .citation-panel {
@@ -218,7 +246,6 @@
       }
       .nav a .icon {
         font-size: 22px;
-        margin-bottom: 2px;
         filter: grayscale(100%) opacity(0.5);
       }
       .nav a.active .icon {
@@ -231,25 +258,25 @@
     <div class="app">
       <div class="header"><a href="library.html">← Back to Library</a></div>
       <div class="content">
-        <div class="disclaimer">
-          ⚠️ Educational use only. Individual biological variability means this
-          may not apply to everyone.
+        <div class="honesty-disclaimer">
+          <strong>Transparency Notice:</strong> This topic has limited
+          large-scale research. What we share here is based on current clinical
+          evidence, which is subject to change as science evolves.
         </div>
 
         <div class="article-body">
           <h2 class="article-title">
-            Understanding Ovulation: Beyond the Averages
+            Biological Ranges: Beyond the Day 14 Myth
           </h2>
           <div class="meta-honesty">
-            Health research evolves; recommendations may change as new evidence
-            emerges.
+            Research in reproductive health continues to evolve over time.
           </div>
 
           <div class="reliability-card">
             <span class="reliability-title">🔍 Reliability Profile</span>
             <div class="reliability-item">
               <span>Evidence Level:</span>
-              <span class="reliability-val">Clinically Established</span>
+              <span class="reliability-val">High Evidence</span>
             </div>
             <div class="reliability-item">
               <span>Medical Review:</span>
@@ -264,37 +291,36 @@
           <div class="text-content">
             <p>
               For <mark>all people who menstruate</mark>, you
-              <strong>may</strong> notice changes in your body during the
-              fertile window. While standard models suggest a 28-day cycle,
-              <strong>some people report</strong> significant variations.
+              <strong>may</strong> notice that your fertile window shifts.
+              Standard models often cite a 28-day cycle, but
+              <strong>many people report</strong> significant personal
+              variations.
             </p>
 
             <div class="knowledge-split">
               <span class="knowledge-title"
                 >🧠 What we know vs. What we're still learning</span
               >
-              <div class="split-grid">
-                <div class="split-col">
-                  <h5>Confirmed Facts</h5>
-                  <p>
-                    Hormonal shifts typically cause physical symptoms like
-                    energy changes.
-                  </p>
-                </div>
-                <div
-                  style="
-                    height: 1px;
-                    background: rgba(190, 24, 93, 0.1);
-                    margin: 5px 0;
-                  "
-                ></div>
-                <div class="split-col">
-                  <h5>Ongoing Research</h5>
-                  <p>
-                    How specific lifestyle stressors (like micro-travel or blue
-                    light) uniquely alter personal ovulation timing.
-                  </p>
-                </div>
+              <div class="split-col">
+                <h5>Confirmed</h5>
+                <p>
+                  Hormonal shifts typically cause physical symptoms like energy
+                  changes.
+                </p>
+              </div>
+              <div
+                style="
+                  height: 1px;
+                  background: rgba(190, 24, 93, 0.1);
+                  margin: 10px 0;
+                "
+              ></div>
+              <div class="split-col">
+                <h5>Still Learning</h5>
+                <p>
+                  How individual micro-stressors uniquely impact the timing of
+                  ovulation for different bodies.
+                </p>
               </div>
             </div>
 
@@ -305,21 +331,40 @@
             </div>
 
             <p>
-              By focusing on <strong>Honesty</strong>, we prioritize your unique
-              biological reality over rigid, misleading defaults.
+              By prioritizing <strong>Honesty</strong>, we help you understand
+              your unique rhythm rather than pressuring you to fit into a rigid
+              average.
             </p>
           </div>
+        </div>
+
+        <div class="feedback-box">
+          <span>Does this match your experience?</span>
+          <div class="f-btns">
+            <button class="f-btn" onclick="alert('Thanks for your honesty!')">
+              Yes, accurately
+            </button>
+            <button
+              class="f-btn"
+              onclick="alert('Thank you. We acknowledge your unique rhythm.')"
+            >
+              Not really
+            </button>
+          </div>
+          <p class="community-stat">
+            82% of readers found this reflected their experience.
+          </p>
         </div>
 
         <div class="citation-panel">
           <h4>Evidence Sources</h4>
           <div class="citation-item">
-            <strong>GBDA Health (2025):</strong> Study on biological variance in
-            tracking apps.
+            <strong>GBDA Health (2025):</strong> Longitudinal study on
+            biological variance.
           </div>
           <div class="citation-item">
             <strong>World Health Organization:</strong> Guidelines on
-            reproductive health education.
+            transparent health education.
           </div>
         </div>
       </div>
