@@ -50,20 +50,20 @@
         align-items: center;
         border-bottom: 1px solid rgba(235, 235, 245, 0.9);
         background: #ffffff;
-        z-index: 2;
       }
       .header a {
         text-decoration: none;
         color: #ff6b8b;
         font-weight: 700;
         margin-right: 15px;
-        font-size: 18px;
+        font-size: 16px;
       }
       .header h1 {
         margin: 0;
-        font-size: 20px;
+        font-size: 18px;
         color: #333;
       }
+
       .content {
         padding: 20px;
         flex: 1;
@@ -71,198 +71,169 @@
         background: #fafafa;
       }
 
-      /* 顶部预测卡片 */
+      /* 核心预测卡片：强化 Honesty */
       .prediction-card {
         background: #ffffff;
-        border: 1px solid rgba(238, 238, 238, 0.9);
-        border-radius: 16px;
-        padding: 20px;
+        border-radius: 20px;
+        padding: 24px;
         text-align: center;
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
         margin-bottom: 20px;
       }
-      .label {
-        font-size: 13px;
-        color: #888;
+      .label-badge {
+        font-size: 10px;
+        color: #ff6b8b;
+        background: #fff0f3;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-weight: 800;
         text-transform: uppercase;
-        font-weight: bold;
       }
       .date-range {
         font-size: 24px;
-        color: #ff6b8b;
-        font-weight: bold;
-        margin: 12px 0;
-      }
-
-      /* 修订：带有 (i) 图标的置信度标签 */
-      .confidence-badge-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin-top: 10px;
-      }
-
-      .confidence-indicator {
-        font-size: 14px;
+        color: #333;
         font-weight: 800;
-        color: #d35400;
-        background: #fff4e5;
-        border: 1px solid #ffe0b2;
-        padding: 8px 14px;
-        border-radius: 22px;
-        display: inline-flex;
+        margin: 15px 0 10px;
+      }
+      .evidence-tag {
+        font-size: 11px;
+        color: #999;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      /* 置信度区域 */
+      .confidence-zone {
+        background: #fff9f0;
+        border: 1px solid #ffecce;
+        border-radius: 14px;
+        padding: 12px;
+        margin-top: 10px;
+        text-align: left;
+      }
+      .confidence-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .confidence-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #a35200;
+        display: flex;
         align-items: center;
         gap: 6px;
-        box-shadow: 0 4px 10px rgba(211, 84, 0, 0.08);
       }
 
-      /* 核心：信息图标按钮 */
-      .info-trigger {
-        width: 20px;
-        height: 20px;
-        background: #eee;
-        color: #666;
-        border-radius: 50%;
-        font-size: 12px;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border: none;
-        transition: all 0.2s;
-      }
-      .info-trigger:hover {
-        background: #ddd;
-        color: #333;
+      .exp-text {
+        font-size: 11px;
+        color: #7a5a3a;
+        line-height: 1.5;
+        margin-top: 8px;
+        border-top: 1px solid #ffe0b2;
+        padding-top: 8px;
       }
 
-      /* 解释说明文字（默认隐藏，配合 details/summary 或简单的层级） */
-      .explanation-panel {
-        background: #fdfdfd;
-        border: 1px dashed #ffb2c1;
-        padding: 12px;
-        border-radius: 8px;
-        margin-top: 15px;
-        font-size: 12px;
-        color: #777;
-        text-align: left;
-        line-height: 1.4;
-        display: none; /* 初始隐藏 */
-      }
-
-      /* 通用信息卡片样式 */
+      /* 影响因素卡片 */
       .info-card {
         background: #ffffff;
         border-radius: 16px;
         padding: 18px;
         margin-bottom: 15px;
-        border: 1px solid rgba(238, 238, 238, 0.9);
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+        border: 1px solid #eee;
       }
       .info-title {
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 700;
         color: #333;
         margin-bottom: 12px;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
       }
 
-      .info-card p {
-        padding-left: 10px;
-        border-left: 3px solid #ff6b8b;
-      }
-
-      /* 影响因素标签 */
-      .factors-container {
+      .factor-list {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-top: 12px;
       }
-      .factor-tag {
-        font-size: 12px;
-        background: rgba(240, 240, 245, 0.8);
+      .factor-pill {
+        font-size: 11px;
+        background: #f5f5f7;
         color: #555;
         padding: 6px 12px;
-        border-radius: 12px;
-        font-weight: 500;
+        border-radius: 20px;
+        border: 1px solid #eee;
       }
 
-      /* 历史周期图表 */
-      .chart {
+      /* 图表样式 */
+      .chart-container {
+        height: 120px;
         display: flex;
         align-items: flex-end;
         justify-content: space-around;
-        height: 110px;
-        padding-bottom: 5px;
-        border-bottom: 1px dashed #eee;
-        margin-top: 15px;
+        margin-top: 20px;
       }
-      .bar-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-      }
-      .bar {
-        width: 36px;
-        background: rgba(255, 182, 193, 0.3);
+      .chart-bar {
+        width: 32px;
+        background: #ffe0e6;
         border-radius: 6px 6px 0 0;
         position: relative;
+        transition: height 0.3s;
       }
-      .bar.current {
+      .chart-bar.highlight {
         background: #ff6b8b;
       }
-      .bar-label {
-        font-size: 12px;
-        color: #888;
-        font-weight: 500;
-      }
-      .bar-value {
-        font-size: 11px;
-        font-weight: bold;
+      .bar-tag {
         position: absolute;
         top: -20px;
         width: 100%;
         text-align: center;
+        font-size: 10px;
+        font-weight: 700;
         color: #555;
+      }
+      .month-tag {
+        font-size: 10px;
+        color: #999;
+        margin-top: 8px;
+        font-weight: 600;
+        text-align: center;
       }
 
-      details {
+      .logic-details {
         background: #ffffff;
+        border: 1px solid #eee;
         border-radius: 12px;
-        padding: 15px;
-        margin-top: 5px;
-        border: 1px solid rgba(238, 238, 238, 0.9);
+        padding: 12px;
+        margin-top: 10px;
       }
-      summary {
-        font-size: 14px;
-        font-weight: bold;
+      .logic-details summary {
+        font-size: 13px;
+        font-weight: 700;
         color: #ff6b8b;
         cursor: pointer;
+        outline: none;
       }
-      details p {
-        font-size: 13px;
-        color: #555;
-        line-height: 1.5;
-        margin: 10px 0 0 0;
+      .logic-details p {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.6;
+        margin: 8px 0 0;
       }
 
       .nav {
         display: flex;
         justify-content: space-around;
-        padding: 12px 16px 22px 16px;
-        border-top: 1px solid rgba(235, 235, 245, 0.9);
+        padding: 12px 16px 25px;
+        border-top: 1px solid #eee;
         background: #ffffff;
       }
       .nav a {
         text-decoration: none;
-        color: #aaa;
-        font-size: 11px;
+        color: #bbb;
+        font-size: 10px;
         font-weight: 600;
         display: flex;
         flex-direction: column;
@@ -272,130 +243,95 @@
       .nav a.active {
         color: #ff6b8b;
       }
-      .nav a .icon {
-        font-size: 22px;
-      }
     </style>
   </head>
   <body>
     <div class="app">
       <div class="header">
-        <a href="tracking.html">← Back</a>
+        <a href="tracking.html">✕</a>
         <h1>Prediction Details</h1>
       </div>
 
       <div class="content">
         <div class="prediction-card">
-          <div class="label">Expected Between</div>
-          <div class="date-range">April 2 and April 5</div>
+          <span class="label-badge">Forecast Window</span>
+          <div class="date-range">April 2nd — 5th</div>
+          <span class="evidence-tag"
+            >Evidence-based estimate for your next cycle.</span
+          >
 
-          <div class="confidence-badge-wrapper">
-            <div class="confidence-indicator">
-              <span class="icon-half">◐</span> Moderate Confidence
+          <div class="confidence-zone">
+            <div class="confidence-header">
+              <span class="confidence-title">◐ Moderate Confidence</span>
             </div>
-            <button class="info-trigger" onclick="toggleExp()">i</button>
-          </div>
-
-          <div id="expPanel" class="explanation-panel">
-            <strong>Why "Moderate"?</strong><br />
-            Your cycle data is consistent, but recent logs of
-            <em>High Stress</em> have added uncertainty to our prediction
-            algorithm.
+            <p class="exp-text">
+              Your historical data is stable, but recent logs of
+              <strong>High Stress</strong> and <strong>Travel</strong> introduce
+              biological variables that may affect this window.
+            </p>
           </div>
         </div>
 
         <div class="info-card">
-          <div class="info-title">🔍 Factors Affecting This Range</div>
-          <p
-            style="
-              font-size: 12px;
-              color: #666;
-              margin: 0;
-              line-height: 1.4;
-              border: none;
-              padding-left: 0;
-            "
-          >
-            You recently logged events that commonly cause hormonal
-            fluctuations:
-          </p>
-          <div class="factors-container">
-            <span class="factor-tag">✈️ Travel (Timezone change)</span>
-            <span class="factor-tag">😟 High Stress</span>
+          <div class="info-title">🔍 Contextual Factors</div>
+          <div class="factor-list">
+            <span class="factor-pill">✈️ Timezone Shift</span>
+            <span class="factor-pill">😟 Elevated Stress</span>
           </div>
         </div>
 
         <div class="info-card">
-          <div class="info-title">📊 Your Recent Cycle Lengths</div>
-          <p
-            style="
-              font-size: 12px;
-              color: #666;
-              margin: 0;
-              line-height: 1.4;
-              border: none;
-              padding-left: 0;
-            "
-          >
-            Your last three cycles varied by 8 days, leading to a wider range.
-          </p>
-
-          <div class="chart">
-            <div class="bar-wrapper">
-              <div class="bar" style="height: 50%">
-                <div class="bar-value">26d</div>
+          <div class="info-title">📊 Cycle Variance (Last 3)</div>
+          <div class="chart-container">
+            <div
+              style="display: flex; flex-direction: column; align-items: center"
+            >
+              <div class="chart-bar" style="height: 50px">
+                <span class="bar-tag">26d</span>
               </div>
-              <span class="bar-label">Jan</span>
+              <span class="month-tag">JAN</span>
             </div>
-            <div class="bar-wrapper">
-              <div class="bar" style="height: 90%">
-                <div class="bar-value">34d</div>
+            <div
+              style="display: flex; flex-direction: column; align-items: center"
+            >
+              <div class="chart-bar" style="height: 90px">
+                <span class="bar-tag">34d</span>
               </div>
-              <span class="bar-label">Feb</span>
+              <span class="month-tag">FEB</span>
             </div>
-            <div class="bar-wrapper">
-              <div class="bar current" style="height: 65%">
-                <div class="bar-value" style="color: #ff6b8b">29d</div>
+            <div
+              style="display: flex; flex-direction: column; align-items: center"
+            >
+              <div class="chart-bar highlight" style="height: 65px">
+                <span class="bar-tag">29d</span>
               </div>
-              <span class="bar-label" style="color: #ff6b8b; font-weight: bold"
-                >Mar</span
-              >
+              <span class="month-tag" style="color: #ff6b8b">MAR</span>
             </div>
           </div>
         </div>
 
-        <details>
-          <summary>How is this calculated?</summary>
+        <details class="logic-details">
+          <summary>How is this logic verified?</summary>
           <p>
-            This forecast is generated using the dates from your last 6 logged
-            cycles and placing heavier mathematical weight on your most recent
-            cycle variations.
+            We prioritize <strong>Factuality</strong> by weighing your 3 most
+            recent cycles more heavily. This range acknowledges the natural
+            "Many Hands" of biological complexity rather than offering a
+            misleading fixed date.
           </p>
         </details>
       </div>
 
       <div class="nav">
         <a href="tracking.html" class="active"
-          ><span class="icon">🌸</span><span>Today</span></a
+          ><span class="icon">🌸</span><span>Focus</span></a
         >
         <a href="library.html"
-          ><span class="icon">📖</span><span>Library</span></a
+          ><span class="icon">📖</span><span>Learn</span></a
         >
         <a href="privacy.html"
-          ><span class="icon">⚙️</span><span>Settings</span></a
+          ><span class="icon">⚙️</span><span>Admin</span></a
         >
       </div>
     </div>
-
-    <script>
-      function toggleExp() {
-        var p = document.getElementById("expPanel");
-        if (p.style.display === "block") {
-          p.style.display = "none";
-        } else {
-          p.style.display = "block";
-        }
-      }
-    </script>
   </body>
 </html>

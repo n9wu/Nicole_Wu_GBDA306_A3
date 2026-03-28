@@ -45,10 +45,10 @@
         overflow: hidden;
       }
 
-      /* --- 新增：复刻原版 Flo 的周视图日历 --- */
+      /* --- 日历头部 --- */
       .calendar-header {
         padding: 20px 20px 5px 20px;
-        background: transparent; /* 让底层背景透过来，模拟渐变感 */
+        background: transparent;
         z-index: 2;
       }
       .cal-top {
@@ -69,7 +69,6 @@
         font-size: 22px;
         color: #333;
       }
-
       .cal-week {
         display: flex;
         justify-content: space-between;
@@ -100,25 +99,20 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        transition: all 0.2s;
       }
-      /* 今天日期的特殊高亮样式 */
       .cal-day.active .today-label {
         position: absolute;
         top: -16px;
         font-size: 9px;
         font-weight: 800;
         color: #333;
-        letter-spacing: 0.5px;
       }
       .cal-day.active .date {
         background: #ffffff;
         color: #ff6b8b;
         font-weight: 700;
-        font-size: 18px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       }
-      /* ------------------------------------- */
 
       .content {
         padding: 15px 20px;
@@ -130,276 +124,217 @@
       .focus-mode-badge {
         background: #e3f2fd;
         color: #1565c0;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
-        padding: 8px 14px;
+        padding: 6px 12px;
         border-radius: 12px;
         border: 1px solid #bbdefb;
-        text-align: center;
-        letter-spacing: 0.5px;
-        box-shadow: 0 4px 10px rgba(21, 101, 192, 0.1);
       }
 
+      /* --- 优化后的圆环区域 --- */
+      .phase-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0 20px;
+      }
       .phase-ring {
-        width: 200px;
-        height: 200px;
-        border: 12px solid rgba(255, 238, 242, 0.9);
+        width: 190px;
+        height: 190px;
+        border: 10px solid rgba(255, 238, 242, 0.9);
         border-top-color: #ff6b8b;
         border-radius: 50%;
-        margin: 20px auto 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         background: #ffffff;
-        text-align: center;
-        padding: 10px;
-      }
-      .phase-title {
-        font-size: 13px;
-        color: #777;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        box-shadow: 0 10px 30px rgba(255, 107, 139, 0.08);
       }
       .phase-name {
-        font-size: 25px;
+        font-size: 26px;
         color: #ff6b8b;
         font-weight: bold;
-        margin: 6px 0;
       }
-      .phase-desc {
-        font-size: 10px;
-        color: #555;
-        margin-top: 6px;
-        line-height: 1.4;
+      .days-to-go {
+        font-size: 14px;
+        font-weight: 700;
+        color: #333;
+        margin-top: 4px;
       }
 
+      .phase-info-box {
+        text-align: center;
+        margin-top: 15px;
+        padding: 0 10px;
+      }
+      .phase-desc {
+        font-size: 11px;
+        color: #666;
+        line-height: 1.4;
+        display: block;
+      }
+      .prediction-evidence {
+        font-size: 10px;
+        color: #aaa;
+        margin-top: 6px;
+        display: block;
+      }
+
+      /* --- 症状卡片 --- */
       .symptom-card {
         background: #ffffff;
         padding: 16px;
         border-radius: 16px;
         margin-top: 15px;
         border-left: 4px solid #ff6b8b;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
       }
       .symptom-card h3 {
-        margin: 0 0 8px 0;
-        font-size: 15px;
+        margin: 0 0 6px 0;
+        font-size: 14px;
         color: #333;
       }
       .symptom-card p {
         margin: 0;
-        font-size: 13px;
+        font-size: 12px;
         color: #555;
         line-height: 1.5;
       }
 
-      details.more-insights {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 15px;
-        margin-top: 15px;
-        border: 1px dashed rgba(200, 200, 210, 0.9);
-        text-align: center;
-      }
-      details.more-insights summary {
-        font-size: 13px;
-        font-weight: bold;
-        color: #888;
-        cursor: pointer;
-        outline: none;
-        list-style: none;
-      }
-      details.more-insights summary::-webkit-details-marker {
-        display: none;
-      }
-      details.more-insights p {
-        font-size: 13px;
-        color: #555;
-        margin: 10px 0 0 0;
-        text-align: left;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
-      }
-
+      /* --- 隐私与数据管理卡片 --- */
       .privacy-card {
         background: #ffffff;
-        padding: 16px;
-        border-radius: 16px;
+        padding: 18px;
+        border-radius: 20px;
         margin-top: 15px;
-        border: 1px solid rgba(238, 238, 238, 0.9);
+        border: 1px solid #f0f0f0;
       }
       .privacy-card h3 {
-        margin: 0 0 10px 0;
-        font-size: 13px;
+        margin: 0 0 15px 0;
+        font-size: 14px;
         color: #333;
         display: flex;
         align-items: center;
-        gap: 6px;
-      }
-      .privacy-card p {
-        margin: 0 0 12px 0;
-        font-size: 12px;
-        color: #666;
-        line-height: 1.5;
-      }
-      .btn-delete {
-        background: #ffffff;
-        color: #e74c3c;
-        border: 1px solid rgba(231, 76, 60, 0.7);
-        padding: 10px 14px;
-        border-radius: 18px;
-        font-size: 12px;
-        font-weight: 700;
-        cursor: pointer;
-        display: block;
-        text-align: center;
-        text-decoration: none;
-        transition: background 0.2s ease;
-      }
-      .btn-delete:hover {
-        background: rgba(255, 237, 239, 0.9);
+        gap: 8px;
       }
 
+      .control-group {
+        margin-bottom: 15px;
+      }
+      .control-label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: #666;
+        margin-bottom: 8px;
+      }
+
+      .slider {
+        width: 100%;
+        accent-color: #ff6b8b;
+        cursor: pointer;
+      }
+      .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 9px;
+        color: #aaa;
+        margin-top: 4px;
+      }
+
+      .sync-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-top: 1px solid #f5f5f5;
+      }
+      .sync-text {
+        font-size: 12px;
+        color: #444;
+        font-weight: 500;
+      }
+
+      /* 开关组件 */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 20px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider-toggle {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #e0e0e0;
+        transition: 0.3s;
+        border-radius: 20px;
+      }
+      .slider-toggle:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+      input:checked + .slider-toggle {
+        background-color: #ff6b8b;
+      }
+      input:checked + .slider-toggle:before {
+        transform: translateX(14px);
+      }
+
+      .btn-delete {
+        background: #fffafa;
+        color: #ff5e5e;
+        border: 1px solid rgba(255, 94, 94, 0.2);
+        padding: 10px;
+        border-radius: 15px;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+      }
+
+      /* --- 底部导航 --- */
       .nav {
         display: flex;
         justify-content: space-around;
-        padding: 12px 16px 22px 16px;
-        border-top: 1px solid rgba(235, 235, 245, 0.9);
+        padding: 12px 16px 25px;
+        border-top: 1px solid #eee;
         background: #ffffff;
-        z-index: 2;
       }
       .nav a {
         text-decoration: none;
-        color: #aaa;
-        font-size: 11px;
+        color: #bbb;
+        font-size: 10px;
         font-weight: 600;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 4px;
-        transition: color 0.2s;
       }
       .nav a.active {
         color: #ff6b8b;
       }
       .nav a .icon {
-        font-size: 22px;
-        filter: grayscale(100%) opacity(0.5);
-      }
-      .nav a.active .icon {
-        filter: none;
-        opacity: 1;
-      }
-
-      /* Floating action button + modal */
-      .fab {
-        position: absolute;
-        right: 20px;
-        bottom: 90px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #ff6b8b, #ff8fc3);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 26px;
-        cursor: pointer;
-        box-shadow: 0 12px 24px rgba(255, 107, 139, 0.35);
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease;
-      }
-      .fab:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 28px rgba(255, 107, 139, 0.4);
-      }
-
-      .modal-backdrop {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.35);
-        display: none;
-        align-items: flex-end;
-        justify-content: center;
-        padding: 0 20px 20px;
-        z-index: 50;
-      }
-      .modal-backdrop.active {
-        display: flex;
-      }
-
-      .modal {
-        width: 100%;
-        max-width: 420px;
-        background: rgba(255, 255, 255, 0.96);
-        border-radius: 24px;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-        padding: 22px;
-      }
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 14px;
-      }
-      .modal-header h3 {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 800;
-        color: #333;
-      }
-      .modal-close {
-        background: rgba(0, 0, 0, 0.05);
-        border: none;
-        border-radius: 12px;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 18px;
-        color: #666;
-      }
-      .modal-close:hover {
-        background: rgba(0, 0, 0, 0.08);
-      }
-      .modal-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 12px;
-      }
-      .modal-item {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(238, 238, 238, 0.9);
-        padding: 14px 16px;
-        border-radius: 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        transition:
-          transform 0.15s ease,
-          box-shadow 0.15s ease;
-      }
-      .modal-item:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
-      }
-      .modal-item span {
-        font-size: 14px;
-        font-weight: 700;
-        color: #333;
-      }
-      .modal-item .meta {
-        font-size: 12px;
-        color: #777;
+        font-size: 20px;
       }
     </style>
   </head>
@@ -442,17 +377,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
           "
         >
-          <div class="focus-mode-badge" style="margin: 0">
-            ✨ Calm Summary Mode Active
-          </div>
+          <div class="focus-mode-badge">Verified Calm View</div>
           <a
             href="prediction.html"
             style="
               color: #ff6b8b;
-              font-size: 13px;
+              font-size: 12px;
               font-weight: bold;
               text-decoration: none;
             "
@@ -460,148 +393,72 @@
           >
         </div>
 
-        <div class="phase-ring">
-          <span class="phase-title">Current Phase</span>
-          <span class="phase-name">Luteal</span>
-          <span
-            class="phase-title"
-            style="color: #333; font-weight: bold; margin: 5px 0"
-            >~5 Days to Period</span
-          >
-          <span class="phase-desc"
-            >Expect natural energy dips as your body prepares to rest.</span
-          >
+        <div class="phase-container">
+          <div class="phase-ring">
+            <span class="phase-name">Luteal</span>
+            <span class="days-to-go">~5 Days</span>
+          </div>
+          <div class="phase-info-box">
+            <span class="phase-desc"
+              >Progesterone is peaking—your body is preparing for rest.</span
+            >
+            <span class="prediction-evidence"
+              >Insights derived from your last 3 recorded cycles.</span
+            >
+          </div>
         </div>
 
         <div class="symptom-card">
-          <h3>📝 You logged: Fatigue</h3>
-          <p>
-            <strong>Phase Connection:</strong> Progesterone peaks during the
-            luteal phase, which naturally increases tiredness.
-          </p>
-          <p
-            style="
-              margin-top: 8px;
-              color: #6a82fb;
-              font-style: italic;
-              font-weight: 500;
-            "
-          >
-            ✨ This is a normal part of your body's rhythm. You're right on
-            track.
-          </p>
+          <h3>📝 Logged: Fatigue</h3>
+          <p>This drop in energy is a common rhythm of the luteal phase.</p>
         </div>
 
-        <details class="more-insights">
-          <summary>Tap to expand other daily insights ▼</summary>
-          <p>
-            💧 <strong>Hydration:</strong> Drink 2L of water to reduce bloating.
-          </p>
-          <p>
-            🧘‍♀️ <strong>Activity:</strong> Gentle yoga or stretching is highly
-            recommended for this phase.
-          </p>
-        </details>
-
         <div class="privacy-card">
-          <h3>🛡️ Privacy Status</h3>
-          <p>
-            <strong>Stored:</strong> Locally on device.<br /><strong
-              >Shared:</strong
-            >
-            No third parties.
+          <h3>🛡️ Data Governance</h3>
+
+          <div class="control-group">
+            <label class="control-label">Local Data Auto-Expiration</label>
+            <input type="range" min="1" max="4" value="2" class="slider" />
+            <div class="slider-labels">
+              <span>48h</span>
+              <span>7d</span>
+              <span>30d</span>
+              <span>Forever</span>
+            </div>
+          </div>
+
+          <div class="sync-row">
+            <span class="sync-text">Import Health Ecosystem Data</span>
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider-toggle"></span>
+            </label>
+          </div>
+          <p style="font-size: 9px; color: #aaa; margin: 0">
+            Cross-referencing device data enhances the accuracy of your personal
+            forecasts.
           </p>
+
           <a
             href="#"
             class="btn-delete"
-            onclick="alert('Step 1 of 2: Confirm deletion of all cycle data?')"
-            >Delete My Data (2 Clicks)</a
+            onclick="alert('Confirm full data wipe?')"
+            >Wipe Local Storage (2 Clicks)</a
           >
-        </div>
-      </div>
-
-      <div class="fab" id="fab" aria-label="Add entry" title="Add entry">+</div>
-
-      <div
-        class="modal-backdrop"
-        id="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-      >
-        <div class="modal">
-          <div class="modal-header">
-            <h3 id="modal-title">Quick log</h3>
-            <button
-              class="modal-close"
-              id="modalClose"
-              aria-label="Close"
-              title="Close"
-            >
-              ✕
-            </button>
-          </div>
-          <ul class="modal-list">
-            <li class="modal-item" data-action="log-symptom">
-              <div>
-                <span>Log symptom</span>
-                <div class="meta">Add today’s mood or symptom</div>
-              </div>
-              <span>📝</span>
-            </li>
-            <li class="modal-item" data-action="log-period">
-              <div>
-                <span>Log period</span>
-                <div class="meta">Mark period start/end</div>
-              </div>
-              <span>🩸</span>
-            </li>
-            <li class="modal-item" data-action="log-note">
-              <div>
-                <span>Journal note</span>
-                <div class="meta">Quick note about your day</div>
-              </div>
-              <span>🖊️</span>
-            </li>
-          </ul>
         </div>
       </div>
 
       <div class="nav">
         <a href="tracking.html" class="active"
-          ><span class="icon">🌸</span><span>Today</span></a
+          ><span class="icon">🌸</span><span>Focus</span></a
         >
         <a href="library.html"
-          ><span class="icon">📖</span><span>Library</span></a
+          ><span class="icon">📖</span><span>Learn</span></a
         >
         <a href="privacy.html"
-          ><span class="icon">⚙️</span><span>Settings</span></a
+          ><span class="icon">⚙️</span><span>Admin</span></a
         >
       </div>
     </div>
-
-    <script>
-      const fab = document.getElementById("fab");
-      const modal = document.getElementById("modal");
-      const modalClose = document.getElementById("modalClose");
-
-      const openModal = () => modal.classList.add("active");
-      const closeModal = () => modal.classList.remove("active");
-
-      fab.addEventListener("click", openModal);
-      modalClose.addEventListener("click", closeModal);
-
-      modal.addEventListener("click", (event) => {
-        if (event.target === modal) closeModal();
-      });
-
-      document.querySelectorAll(".modal-item").forEach((item) => {
-        item.addEventListener("click", () => {
-          const action = item.dataset.action;
-          closeModal();
-          alert(`(Mock) ${action.replace("-", " ")} opened.`);
-        });
-      });
-    </script>
   </body>
 </html>
