@@ -132,7 +132,7 @@
         border: 1px solid #bbdefb;
       }
 
-      /* --- 优化后的圆环区域 --- */
+      /* --- 圆环区域 --- */
       .phase-container {
         display: flex;
         flex-direction: column;
@@ -257,7 +257,6 @@
         font-weight: 500;
       }
 
-      /* 开关组件 */
       .switch {
         position: relative;
         display: inline-block;
@@ -312,12 +311,11 @@
         margin-top: 10px;
       }
 
-      /* --- 底部导航 --- */
-      /* --- 统一的全局导航栏样式 --- */
+      /* --- 统一导航栏 --- */
       .nav {
         display: flex;
         justify-content: space-around;
-        padding: 12px 16px 25px 16px; /* 底部预留 25px 适配手机手势条 */
+        padding: 12px 16px 25px 16px;
         border-top: 1px solid rgba(235, 235, 245, 0.8);
         background: #ffffff;
         z-index: 10;
@@ -337,13 +335,131 @@
         color: #ff6b8b;
       }
       .nav a .icon {
-        font-size: 22px; /* 统一图标大小 */
+        font-size: 22px;
         margin-bottom: 2px;
-        filter: grayscale(100%) opacity(0.5); /* 非活动状态置灰 */
+        filter: grayscale(100%) opacity(0.5);
       }
       .nav a.active .icon {
-        filter: none; /* 活动状态恢复颜色 */
+        filter: none;
         opacity: 1;
+      }
+
+      /* --- NEW: Floating + Button --- */
+      .fab {
+        position: absolute;
+        right: 24px;
+        bottom: 100px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff6b8b, #ff8da1);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        box-shadow: 0 8px 24px rgba(255, 107, 139, 0.4);
+        cursor: pointer;
+        z-index: 5;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .fab:active {
+        transform: scale(0.9);
+      }
+
+      /* --- NEW: Improved Popup (Sheet) --- */
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        display: none;
+        z-index: 100;
+        animation: fadeIn 0.3s ease;
+      }
+      .sheet {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: white;
+        border-radius: 24px 24px 0 0;
+        padding: 30px 24px 40px;
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+      }
+      .sheet.active {
+        transform: translateY(0);
+      }
+
+      .sheet-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .sheet-header h3 {
+        margin: 0;
+        font-size: 20px;
+        color: #333;
+        font-weight: 800;
+      }
+      .close-sheet {
+        font-size: 20px;
+        color: #ccc;
+        cursor: pointer;
+        padding: 5px;
+      }
+
+      .transparency-note {
+        font-size: 11px;
+        color: #888;
+        background: #f8f8f8;
+        padding: 10px 14px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        line-height: 1.4;
+      }
+
+      .log-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .log-item {
+        background: #fff;
+        border: 1.5px solid #f0f0f0;
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .log-item:hover {
+        border-color: #ffb6c1;
+        background: #fffafb;
+      }
+      .log-item .emoji {
+        font-size: 24px;
+      }
+      .log-item .label-text {
+        font-size: 13px;
+        font-weight: 700;
+        color: #444;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -424,7 +540,6 @@
 
         <div class="privacy-card">
           <h3>🛡️ Data Governance</h3>
-
           <div class="control-group">
             <label class="control-label">Local Data Auto-Expiration</label>
             <input type="range" min="1" max="4" value="2" class="slider" />
@@ -435,7 +550,6 @@
               <span>Forever</span>
             </div>
           </div>
-
           <div class="sync-row">
             <span class="sync-text">Import Health Ecosystem Data</span>
             <label class="switch">
@@ -447,13 +561,47 @@
             Cross-referencing device data enhances the accuracy of your personal
             forecasts.
           </p>
-
           <a
             href="#"
             class="btn-delete"
             onclick="alert('Confirm full data wipe?')"
             >Wipe Local Storage (2 Clicks)</a
           >
+        </div>
+      </div>
+
+      <div class="fab" onclick="openSheet()">+</div>
+
+      <div class="overlay" id="overlay" onclick="closeSheet()">
+        <div class="sheet" id="sheet" onclick="event.stopPropagation()">
+          <div class="sheet-header">
+            <h3>Quick Log</h3>
+            <span class="close-sheet" onclick="closeSheet()">✕</span>
+          </div>
+
+          <div class="transparency-note">
+            <strong>Why log?</strong> Sharing your daily state helps our
+            <strong>Honesty</strong> model better account for stress and
+            biological variability. Data remains local.
+          </div>
+
+          <div class="log-grid">
+            <div class="log-item" onclick="logDone('Period')">
+              <span class="emoji">🩸</span
+              ><span class="label-text">Period</span>
+            </div>
+            <div class="log-item" onclick="logDone('Energy')">
+              <span class="emoji">⚡</span
+              ><span class="label-text">Energy</span>
+            </div>
+            <div class="log-item" onclick="logDone('Mood')">
+              <span class="emoji">😊</span><span class="label-text">Mood</span>
+            </div>
+            <div class="log-item" onclick="logDone('Symptoms')">
+              <span class="emoji">📝</span
+              ><span class="label-text">Symptoms</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -469,5 +617,26 @@
         >
       </div>
     </div>
+
+    <script>
+      function openSheet() {
+        const overlay = document.getElementById("overlay");
+        const sheet = document.getElementById("sheet");
+        overlay.style.display = "block";
+        setTimeout(() => sheet.classList.add("active"), 10);
+      }
+
+      function closeSheet() {
+        const overlay = document.getElementById("overlay");
+        const sheet = document.getElementById("sheet");
+        sheet.classList.remove("active");
+        setTimeout(() => (overlay.style.display = "none"), 300);
+      }
+
+      function logDone(type) {
+        alert(type + " logged locally. Accountability updated.");
+        closeSheet();
+      }
+    </script>
   </body>
 </html>
