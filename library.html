@@ -22,6 +22,11 @@
             rgba(255, 107, 139, 0.25),
             transparent 55%
           ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 182, 193, 0.22),
+            transparent 55%
+          ),
           linear-gradient(180deg, #f5f2ff 0%, #f3f3f8 55%, #e0e0e0 100%);
       }
       .app {
@@ -36,7 +41,6 @@
         overflow: hidden;
       }
 
-      /* 匿名模式横幅 - Addressing S2 [cite: 76, 83] */
       .anon-banner {
         background: #f0f7ff;
         color: #0056b3;
@@ -63,10 +67,14 @@
         font-weight: 800;
       }
 
-      /* Honesty 引导语 [cite: 67, 95] */
+      /* --- NEW: Honesty 核心引导语 --- */
       .meta-intro {
         font-size: 11px;
         color: #888;
+        background: #fdfdfd;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px dashed #ddd;
         margin-bottom: 15px;
         line-height: 1.4;
       }
@@ -86,21 +94,23 @@
         display: flex;
         gap: 8px;
         overflow-x: auto;
-        padding-bottom: 5px;
+        padding-bottom: 8px;
         scrollbar-width: none;
       }
       .filter-chip {
         white-space: nowrap;
-        padding: 6px 12px;
+        padding: 8px 14px;
         background: #f0f0f0;
-        border-radius: 10px;
+        border-radius: 12px;
         font-size: 11px;
         font-weight: 700;
         color: #666;
+        border: 1px solid transparent;
       }
       .filter-chip.active {
-        background: #ff6b8b;
-        color: #fff;
+        background: #fff0f3;
+        color: #ff6b8b;
+        border-color: #ff6b8b;
       }
 
       .content {
@@ -110,7 +120,6 @@
         background: #fafafa;
       }
 
-      /* 文章卡片 */
       .article-card {
         background: #ffffff;
         border: 1px solid #f0f0f0;
@@ -126,7 +135,6 @@
         transform: translateY(-2px);
       }
 
-      /* 描述性标签样式 - Factuality  */
       .evidence-badge {
         display: inline-flex;
         align-items: center;
@@ -134,7 +142,7 @@
         font-size: 9px;
         font-weight: 800;
         text-transform: uppercase;
-        padding: 4px 8px;
+        padding: 4px 10px;
         border-radius: 6px;
         margin-bottom: 10px;
       }
@@ -165,6 +173,15 @@
         margin-bottom: 12px;
       }
 
+      /* --- NEW: Honesty 变异性说明 --- */
+      .honesty-marker {
+        font-size: 10px;
+        color: #d35400;
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: block;
+      }
+
       .card-meta {
         font-size: 10px;
         color: #999;
@@ -175,11 +192,10 @@
         border-top: 1px solid #f9f9f9;
       }
 
-      /* --- 统一的全局导航栏样式 --- */
       .nav {
         display: flex;
         justify-content: space-around;
-        padding: 12px 16px 25px 16px; /* 底部预留 25px 适配手机手势条 */
+        padding: 12px 16px 25px 16px;
         border-top: 1px solid rgba(235, 235, 245, 0.8);
         background: #ffffff;
         z-index: 10;
@@ -193,18 +209,17 @@
         flex-direction: column;
         align-items: center;
         gap: 4px;
-        transition: all 0.2s ease;
       }
       .nav a.active {
         color: #ff6b8b;
       }
       .nav a .icon {
-        font-size: 22px; /* 统一图标大小 */
+        font-size: 22px;
         margin-bottom: 2px;
-        filter: grayscale(100%) opacity(0.5); /* 非活动状态置灰 */
+        filter: grayscale(100%) opacity(0.5);
       }
       .nav a.active .icon {
-        filter: none; /* 活动状态恢复颜色 */
+        filter: none;
         opacity: 1;
       }
     </style>
@@ -219,32 +234,37 @@
       <div class="header">
         <h1>Health Library</h1>
         <p class="meta-intro">
-          <strong>Transparency Note:</strong> Content is categorized by evidence
-          level to help you judge information reliability[cite: 67, 95].
+          <strong>Transparency Note:</strong> Not all health information is
+          equally certain. We label each article so you can understand its
+          limits.
         </p>
         <input
           type="text"
           class="search-bar"
-          placeholder="🔍 Search evidence-based articles..."
+          placeholder="🔍 Search anonymously..."
         />
+
         <div class="filter-scroll">
-          <div class="filter-chip active">All</div>
-          <div class="filter-chip">Clinical</div>
-          <div class="filter-chip">Research</div>
-          <div class="filter-chip">Community</div>
+          <div class="filter-chip active">All Topics</div>
+          <div class="filter-chip">High Evidence (Well-supported)</div>
+          <div class="filter-chip">Emerging Evidence (Still developing)</div>
+          <div class="filter-chip">Lived Experience (User-reported)</div>
         </div>
       </div>
 
       <div class="content">
         <a href="article.html" class="article-card">
           <span class="evidence-badge type-clinical"
-            >📚 Clinically Established (High Reliability)</span
+            >📚 High Evidence (Well-supported)</span
           >
           <h3 class="card-title">Biological Ranges: Beyond the Day 14 Myth</h3>
           <p class="card-desc">
             Understanding why cycles operate on a variable spectrum rather than
-            a single fixed date[cite: 73, 77].
+            a single fixed date.
           </p>
+          <span class="honesty-marker"
+            >⚠️ Note: Common, but varies between individuals.</span
+          >
           <div class="card-meta">
             <span style="color: #1565c0">✓ Licensed OB-GYN Reviewed</span>
             <span>Mar 2026</span>
@@ -253,13 +273,17 @@
 
         <a href="#" class="article-card">
           <span class="evidence-badge type-research"
-            >🔬 Emerging Research (Early Findings)</span
+            >🔬 Emerging Evidence (Still developing)</span
           >
           <h3 class="card-title">Stress & Hormonal Variability</h3>
           <p class="card-desc">
             Recent studies exploring how external factors impact your unique
-            biological rhythm[cite: 46, 73].
+            biological rhythm.
           </p>
+          <span class="honesty-marker"
+            >⚠️ Note: Findings are still evolving; individual results
+            vary.</span
+          >
           <div class="card-meta">
             <span>Evidence-based</span>
             <span>Feb 2026</span>
@@ -268,13 +292,16 @@
 
         <a href="#" class="article-card">
           <span class="evidence-badge type-community"
-            >💬 Community Experience (User Reported)</span
+            >💬 Lived Experience (User Reported)</span
           >
           <h3 class="card-title">Managing Energy Without Daily Tracking</h3>
           <p class="card-desc">
             Non-data-driven strategies for body awareness submitted by our
-            community members[cite: 47, 77].
+            community members.
           </p>
+          <span class="honesty-marker"
+            >⚠️ Note: Based on personal accounts; not clinical advice.</span
+          >
           <div class="card-meta">
             <span>Verified Experience</span>
             <span>Jan 2026</span>

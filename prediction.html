@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flo Health - Predictions</title>
+    <title>Flo Health - Prediction Details</title>
     <style>
       * {
         box-sizing: border-box;
@@ -32,13 +32,9 @@
       .app {
         width: 393px;
         height: 852px;
-        max-width: 100vw;
-        max-height: 100vh;
         background: #ffffff;
         border-radius: 28px;
-        box-shadow:
-          0 18px 40px rgba(0, 0, 0, 0.12),
-          0 8px 18px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
         display: flex;
         flex-direction: column;
         position: relative;
@@ -48,7 +44,7 @@
         padding: 22px 20px;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid rgba(235, 235, 245, 0.9);
+        border-bottom: 1px solid #eee;
         background: #ffffff;
       }
       .header a {
@@ -63,7 +59,6 @@
         font-size: 18px;
         color: #333;
       }
-
       .content {
         padding: 20px;
         flex: 1;
@@ -71,7 +66,7 @@
         background: #fafafa;
       }
 
-      /* 核心预测卡片：强化 Honesty */
+      /* 1. 核心预测卡片 */
       .prediction-card {
         background: #ffffff;
         border-radius: 20px;
@@ -96,26 +91,22 @@
         font-weight: 800;
         margin: 15px 0 10px;
       }
-      .evidence-tag {
-        font-size: 11px;
-        color: #999;
-        margin-bottom: 15px;
+      .wellbeing-quote {
+        font-size: 12px;
+        color: #ff6b8b;
+        font-weight: 600;
+        font-style: italic;
         display: block;
+        margin-bottom: 15px;
       }
 
-      /* 置信度区域 */
+      /* 2. 置信度解释区 */
       .confidence-zone {
         background: #fff9f0;
         border: 1px solid #ffecce;
         border-radius: 14px;
-        padding: 12px;
-        margin-top: 10px;
+        padding: 14px;
         text-align: left;
-      }
-      .confidence-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
       }
       .confidence-title {
         font-size: 13px;
@@ -125,7 +116,6 @@
         align-items: center;
         gap: 6px;
       }
-
       .exp-text {
         font-size: 11px;
         color: #7a5a3a;
@@ -135,12 +125,12 @@
         padding-top: 8px;
       }
 
-      /* 影响因素卡片 */
+      /* 3. 背景因素 */
       .info-card {
         background: #ffffff;
         border-radius: 16px;
         padding: 18px;
-        margin-bottom: 15px;
+        margin-top: 20px;
         border: 1px solid #eee;
       }
       .info-title {
@@ -152,24 +142,21 @@
         align-items: center;
         gap: 8px;
       }
-
-      .factor-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
       .factor-pill {
         font-size: 11px;
-        background: #f5f5f7;
-        color: #555;
+        background: #fef2f2;
+        color: #991b1b;
         padding: 6px 12px;
         border-radius: 20px;
-        border: 1px solid #eee;
+        display: inline-block;
+        margin-right: 5px;
+        border: 1px solid #fee2e2;
+        font-weight: 600;
       }
 
-      /* 图表样式 */
+      /* 4. 周期波动图表 */
       .chart-container {
-        height: 120px;
+        height: 110px;
         display: flex;
         align-items: flex-end;
         justify-content: space-around;
@@ -180,7 +167,6 @@
         background: #ffe0e6;
         border-radius: 6px 6px 0 0;
         position: relative;
-        transition: height 0.3s;
       }
       .chart-bar.highlight {
         background: #ff6b8b;
@@ -202,19 +188,86 @@
         text-align: center;
       }
 
+      /* 5. 失败场景 */
+      .limitation-card {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 18px;
+        margin-top: 20px;
+        border: 1px dashed #cbd5e1;
+      }
+      .limitation-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #475569;
+        margin-bottom: 10px;
+      }
+      .limitation-list {
+        font-size: 11px;
+        color: #64748b;
+        padding-left: 18px;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* --- NEW: Reflective UI (你想要的功能) --- */
+      .reflective-box {
+        background: #ffffff;
+        border: 1px solid #f0f0f0;
+        border-radius: 16px;
+        padding: 18px;
+        margin-top: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      }
+      .reflective-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .feedback-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .f-btn {
+        padding: 8px 16px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        background: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .f-btn:active {
+        background: #fff0f3;
+        border-color: #ff6b8b;
+        color: #ff6b8b;
+      }
+      .honesty-disclaimer {
+        font-size: 10px;
+        color: #aaa;
+        margin-top: 12px;
+        line-height: 1.4;
+      }
+
+      /* 6. 验证逻辑 */
       .logic-details {
         background: #ffffff;
         border: 1px solid #eee;
         border-radius: 12px;
         padding: 12px;
-        margin-top: 10px;
+        margin-top: 15px;
       }
       .logic-details summary {
         font-size: 13px;
         font-weight: 700;
         color: #ff6b8b;
         cursor: pointer;
-        outline: none;
       }
       .logic-details p {
         font-size: 12px;
@@ -223,11 +276,11 @@
         margin: 8px 0 0;
       }
 
-      /* --- 统一的全局导航栏样式 --- */
+      /* --- 统一导航 --- */
       .nav {
         display: flex;
         justify-content: space-around;
-        padding: 12px 16px 25px 16px; /* 底部预留 25px 适配手机手势条 */
+        padding: 12px 16px 25px 16px;
         border-top: 1px solid rgba(235, 235, 245, 0.8);
         background: #ffffff;
         z-index: 10;
@@ -241,18 +294,16 @@
         flex-direction: column;
         align-items: center;
         gap: 4px;
-        transition: all 0.2s ease;
       }
       .nav a.active {
         color: #ff6b8b;
       }
       .nav a .icon {
-        font-size: 22px; /* 统一图标大小 */
-        margin-bottom: 2px;
-        filter: grayscale(100%) opacity(0.5); /* 非活动状态置灰 */
+        font-size: 22px;
+        filter: grayscale(100%) opacity(0.5);
       }
       .nav a.active .icon {
-        filter: none; /* 活动状态恢复颜色 */
+        filter: none;
         opacity: 1;
       }
     </style>
@@ -261,39 +312,43 @@
     <div class="app">
       <div class="header">
         <a href="tracking.html">✕</a>
-        <h1>Prediction Details</h1>
+        <h1>Forecast Details</h1>
       </div>
 
       <div class="content">
         <div class="prediction-card">
-          <span class="label-badge">Forecast Window</span>
+          <span class="label-badge">Estimated Window</span>
           <div class="date-range">April 2nd — 5th</div>
-          <span class="evidence-tag"
-            >Evidence-based estimate for your next cycle.</span
+          <span class="wellbeing-quote"
+            >"Not knowing exactly is normal — cycles can vary."</span
           >
 
           <div class="confidence-zone">
             <div class="confidence-header">
-              <span class="confidence-title">◐ Moderate Confidence</span>
+              <span class="confidence-title">◐ Low Confidence</span>
             </div>
             <p class="exp-text">
-              Your historical data is stable, but recent logs of
-              <strong>High Stress</strong> and <strong>Travel</strong> introduce
-              biological variables that may affect this window.
+              Our confidence is lower this month because
+              <strong>external lifestyle factors</strong> (logged below) are
+              actively influencing your biological rhythm.
             </p>
           </div>
         </div>
 
         <div class="info-card">
           <div class="info-title">🔍 Contextual Factors</div>
-          <div class="factor-list">
-            <span class="factor-pill">✈️ Timezone Shift</span>
-            <span class="factor-pill">😟 Elevated Stress</span>
+          <div style="margin-bottom: 10px">
+            <span class="factor-pill">✈️ Travel Logged</span>
+            <span class="factor-pill">😟 High Stress</span>
           </div>
+          <p style="font-size: 11px; color: #666; margin: 0; line-height: 1.4">
+            These events commonly cause hormonal fluctuations, making a
+            fixed-date prediction less <strong>Honest</strong>.
+          </p>
         </div>
 
         <div class="info-card">
-          <div class="info-title">📊 Cycle Variance (Last 3)</div>
+          <div class="info-title">📊 Historical Variance</div>
           <div class="chart-container">
             <div
               style="display: flex; flex-direction: column; align-items: center"
@@ -317,18 +372,50 @@
               <div class="chart-bar highlight" style="height: 65px">
                 <span class="bar-tag">29d</span>
               </div>
-              <span class="month-tag" style="color: #ff6b8b">MAR</span>
+              <span class="month-tag" style="color: #ff6b8b; font-weight: 700"
+                >MAR</span
+              >
             </div>
           </div>
+        </div>
+
+        <div class="limitation-card">
+          <div class="limitation-title">🧠 Model Blindspots</div>
+          <ul class="limitation-list">
+            <li>Recent significant cycle changes</li>
+            <li>Incomplete symptom logs</li>
+            <li>Intensifying external stressors</li>
+          </ul>
+        </div>
+
+        <div class="reflective-box">
+          <span class="reflective-title">Does this reflect how you feel?</span>
+          <div class="feedback-btns">
+            <button
+              class="f-btn"
+              onclick="alert('Thank you for the feedback!')"
+            >
+              Yes, accurately
+            </button>
+            <button
+              class="f-btn"
+              onclick="alert('Thanks! This helps us improve.')"
+            >
+              Not really
+            </button>
+          </div>
+          <p class="honesty-disclaimer">
+            Your feedback helps our <strong>Honesty</strong> model refine its
+            predictions for you.
+          </p>
         </div>
 
         <details class="logic-details">
           <summary>How is this logic verified?</summary>
           <p>
-            We prioritize <strong>Factuality</strong> by weighing your 3 most
-            recent cycles more heavily. This range acknowledges the natural
-            "Many Hands" of biological complexity rather than offering a
-            misleading fixed date.
+            We prioritize <strong>Honesty</strong> by acknowledging biological
+            complexity. Our model weighs your 3 most recent cycles to provide a
+            range that reflects your reality, not an abstract average.
           </p>
         </details>
       </div>

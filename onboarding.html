@@ -32,16 +32,11 @@
       .app {
         width: 393px;
         height: 852px;
-        max-width: 100vw;
-        max-height: 100vh;
         background: #ffffff;
         border-radius: 28px;
-        box-shadow:
-          0 18px 40px rgba(0, 0, 0, 0.12),
-          0 8px 18px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* 改为从上往下排列 */
         padding: 60px 28px 34px 28px;
         position: relative;
         overflow: hidden;
@@ -51,7 +46,7 @@
         text-align: center;
         color: #ff6b8b;
         font-size: 32px;
-        font-weight: bold;
+        font-weight: 800;
         margin-bottom: 10px;
       }
       .logo::before {
@@ -60,85 +55,68 @@
       }
       .subtitle {
         text-align: center;
-        color: #6a6a6a;
+        color: #666;
         font-size: 15px;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
       }
 
-      /* 新增：价值声明卡片 (Value Signal) */
       .value-signal {
         background: #fff5f7;
         border: 1px solid #ffdae1;
-        padding: 16px;
-        border-radius: 14px;
-        margin-bottom: 24px;
+        padding: 18px;
+        border-radius: 16px;
+        margin-bottom: 30px;
         font-size: 13px;
         color: #d64a67;
-        display: flex;
-        align-items: center;
-        gap: 10px;
+        line-height: 1.4;
       }
 
       .choice-card {
         display: block;
         background: #ffffff;
-        border: 1px solid rgba(238, 238, 238, 0.9);
-        padding: 22px;
-        border-radius: 22px;
+        border: 1px solid #f0f0f0;
+        padding: 24px;
+        border-radius: 24px;
         margin-bottom: 20px;
         text-decoration: none;
-        transition:
-          transform 0.2s ease,
-          border-color 0.2s ease,
-          box-shadow 0.2s ease;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
       }
       .choice-card:hover {
         transform: translateY(-3px);
         border-color: #ffb6c1;
-        box-shadow: 0 16px 28px rgba(255, 107, 139, 0.15);
+        box-shadow: 0 12px 24px rgba(255, 107, 139, 0.1);
       }
+
       .choice-card h2 {
-        color: #ff6b8b;
+        color: #333;
         font-size: 19px;
-        margin: 0 0 10px 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        margin: 0 0 12px 0;
+        font-weight: 800;
       }
       .choice-card p {
-        color: #555;
+        color: #666;
         font-size: 14px;
-        margin: 0;
+        margin: 0 0 12px;
         line-height: 1.5;
       }
 
-      /* 针对 S2 增加的显性化标签 */
-      .badge {
-        display: inline-block;
-        font-size: 10px;
-        font-weight: bold;
+      /* 核心内在价值文案样式 */
+      .intrinsic-note {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ff6b8b;
         text-transform: uppercase;
-        padding: 3px 8px;
-        border-radius: 6px;
-        margin-top: 10px;
-      }
-      .badge-privacy {
-        background: #e8f5e9;
-        color: #2e7d32;
-      }
-      .badge-trust {
-        background: #e3f2fd;
-        color: #1565c0;
+        letter-spacing: 0.5px;
       }
 
       .privacy-note {
         text-align: center;
         font-size: 13px;
         color: #888;
-        margin-top: auto; /* 置底 */
-        padding: 20px 0;
-        border-top: 1px dashed #eee;
+        margin-top: auto;
+        padding-top: 20px;
+        border-top: 1px solid #f0f0f0;
         line-height: 1.6;
       }
 
@@ -160,37 +138,36 @@
       <p class="subtitle">Ethical care for your cycle journey.</p>
 
       <div class="value-signal">
-        <span>🛡️</span>
-        <div>
-          <strong>Your Data, Your Choice</strong><br />
-          Select how you want to interact with us.
-        </div>
+        <strong>🛡️ Your Journey, Your Terms</strong><br />
+        Choose how you want to experience Flo today.
       </div>
 
       <a href="tracking.html" class="choice-card">
         <h2>📅 Track My Cycle</h2>
         <p>
-          Receive evidence-based predictions with clear
-          <strong>Honesty</strong> regarding accuracy. For users seeking
-          reassurance through data.
+          Log symptoms to receive evidence-based insights tailored to your
+          rhythm.
         </p>
-        <span class="badge badge-trust">Personalized Experience</span>
+        <span class="intrinsic-note"
+          >✨ Personalized insights (Based on your data)</span
+        >
       </a>
 
       <a href="library.html" class="choice-card">
-        <h2>📚 Explore Library</h2>
+        <h2>📖 Explore Library</h2>
         <p>
-          Access all medical content anonymously.
-          <strong>No tracking required</strong>—perfect for private health
-          education.
+          Learn about reproductive health through our expert-verified evidence
+          spectrum.
         </p>
-        <span class="badge badge-privacy">Full Anonymity</span>
+        <span class="intrinsic-note" style="color: #2e7d32"
+          >🔓 Learn without sharing any personal data</span
+        >
       </a>
 
       <div class="privacy-note">
-        🔒 <strong>Flexible Ownership:</strong><br />
-        You can transition between tracking and library-only modes in Settings
-        at any time. [cite: 89]
+        🔒 <strong>Flexible Ownership</strong><br />
+        Transition between tracking and library-only modes in your settings at
+        any time.
       </div>
     </div>
   </body>

@@ -45,10 +45,9 @@
         overflow: hidden;
       }
 
-      /* --- 日历头部 --- */
+      /* --- 日历头部 (保持原 UI) --- */
       .calendar-header {
         padding: 20px 20px 5px 20px;
-        background: transparent;
         z-index: 2;
       }
       .cal-top {
@@ -56,18 +55,6 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
-      }
-      .cal-avatar {
-        font-size: 26px;
-      }
-      .cal-month {
-        font-size: 17px;
-        font-weight: 600;
-        color: #333;
-      }
-      .cal-icon-btn {
-        font-size: 22px;
-        color: #333;
       }
       .cal-week {
         display: flex;
@@ -81,31 +68,16 @@
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        position: relative;
-      }
-      .cal-day .weekday {
-        font-size: 10px;
-        color: #999;
-        font-weight: 600;
-        text-transform: uppercase;
       }
       .cal-day .date {
         font-size: 16px;
         color: #e59b8b;
-        font-weight: 500;
         width: 36px;
         height: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-      }
-      .cal-day.active .today-label {
-        position: absolute;
-        top: -16px;
-        font-size: 9px;
-        font-weight: 800;
-        color: #333;
       }
       .cal-day.active .date {
         background: #ffffff;
@@ -121,6 +93,7 @@
         background: #fafafa;
       }
 
+      /* --- 保持原 UI 的 Badge --- */
       .focus-mode-badge {
         background: #e3f2fd;
         color: #1565c0;
@@ -132,7 +105,7 @@
         border: 1px solid #bbdefb;
       }
 
-      /* --- 圆环区域 --- */
+      /* --- 圆环区域 (保持原 UI) --- */
       .phase-container {
         display: flex;
         flex-direction: column;
@@ -182,7 +155,7 @@
         display: block;
       }
 
-      /* --- 症状卡片 --- */
+      /* --- 症状卡片 (微调文案以体现 Wellbeing) --- */
       .symptom-card {
         background: #ffffff;
         padding: 16px;
@@ -203,25 +176,13 @@
         line-height: 1.5;
       }
 
-      /* --- 隐私与数据管理卡片 --- */
+      /* --- 隐私卡片 (保持原 UI) --- */
       .privacy-card {
         background: #ffffff;
         padding: 18px;
         border-radius: 20px;
         margin-top: 15px;
         border: 1px solid #f0f0f0;
-      }
-      .privacy-card h3 {
-        margin: 0 0 15px 0;
-        font-size: 14px;
-        color: #333;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .control-group {
-        margin-bottom: 15px;
       }
       .control-label {
         display: block;
@@ -230,7 +191,6 @@
         color: #666;
         margin-bottom: 8px;
       }
-
       .slider {
         width: 100%;
         accent-color: #ff6b8b;
@@ -243,23 +203,16 @@
         color: #aaa;
         margin-top: 4px;
       }
-
       .sync-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 12px 0;
         border-top: 1px solid #f5f5f5;
+        margin-top: 10px;
       }
-      .sync-text {
-        font-size: 12px;
-        color: #444;
-        font-weight: 500;
-      }
-
       .switch {
         position: relative;
-        display: inline-block;
         width: 34px;
         height: 20px;
       }
@@ -297,21 +250,7 @@
         transform: translateX(14px);
       }
 
-      .btn-delete {
-        background: #fffafa;
-        color: #ff5e5e;
-        border: 1px solid rgba(255, 94, 94, 0.2);
-        padding: 10px;
-        border-radius: 15px;
-        font-size: 11px;
-        font-weight: 700;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        margin-top: 10px;
-      }
-
-      /* --- 统一导航栏 --- */
+      /* --- 统一导航 --- */
       .nav {
         display: flex;
         justify-content: space-around;
@@ -329,14 +268,12 @@
         flex-direction: column;
         align-items: center;
         gap: 4px;
-        transition: all 0.2s ease;
       }
       .nav a.active {
         color: #ff6b8b;
       }
       .nav a .icon {
         font-size: 22px;
-        margin-bottom: 2px;
         filter: grayscale(100%) opacity(0.5);
       }
       .nav a.active .icon {
@@ -344,7 +281,7 @@
         opacity: 1;
       }
 
-      /* --- NEW: Floating + Button --- */
+      /* --- Floating Button & Sheet --- */
       .fab {
         position: absolute;
         right: 24px;
@@ -352,7 +289,7 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #ff6b8b, #ff8da1);
+        background: #ff6b8b;
         color: white;
         display: flex;
         align-items: center;
@@ -361,13 +298,7 @@
         box-shadow: 0 8px 24px rgba(255, 107, 139, 0.4);
         cursor: pointer;
         z-index: 5;
-        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
-      .fab:active {
-        transform: scale(0.9);
-      }
-
-      /* --- NEW: Improved Popup (Sheet) --- */
       .overlay {
         position: absolute;
         top: 0;
@@ -378,7 +309,6 @@
         backdrop-filter: blur(4px);
         display: none;
         z-index: 100;
-        animation: fadeIn 0.3s ease;
       }
       .sheet {
         position: absolute;
@@ -388,78 +318,10 @@
         border-radius: 24px 24px 0 0;
         padding: 30px 24px 40px;
         transform: translateY(100%);
-        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
       }
       .sheet.active {
         transform: translateY(0);
-      }
-
-      .sheet-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .sheet-header h3 {
-        margin: 0;
-        font-size: 20px;
-        color: #333;
-        font-weight: 800;
-      }
-      .close-sheet {
-        font-size: 20px;
-        color: #ccc;
-        cursor: pointer;
-        padding: 5px;
-      }
-
-      .transparency-note {
-        font-size: 11px;
-        color: #888;
-        background: #f8f8f8;
-        padding: 10px 14px;
-        border-radius: 12px;
-        margin-bottom: 24px;
-        line-height: 1.4;
-      }
-
-      .log-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-      .log-item {
-        background: #fff;
-        border: 1.5px solid #f0f0f0;
-        border-radius: 16px;
-        padding: 16px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .log-item:hover {
-        border-color: #ffb6c1;
-        background: #fffafb;
-      }
-      .log-item .emoji {
-        font-size: 24px;
-      }
-      .log-item .label-text {
-        font-size: 13px;
-        font-weight: 700;
-        color: #444;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
       }
     </style>
   </head>
@@ -521,52 +383,50 @@
         <div class="phase-container">
           <div class="phase-ring">
             <span class="phase-name">Luteal</span>
-            <span class="days-to-go">~5 Days</span>
+            <span class="days-to-go">~5 Days Left</span>
           </div>
           <div class="phase-info-box">
             <span class="phase-desc"
-              >Progesterone is peaking—your body is preparing for rest.</span
+              >Progesterone is peaking—your body is naturally guiding you to
+              rest.</span
             >
             <span class="prediction-evidence"
-              >Insights derived from your last 3 recorded cycles.</span
+              >Estimated window based on your last 3 recorded cycles. Accuracy
+              varies with stress.</span
             >
           </div>
         </div>
 
         <div class="symptom-card">
           <h3>📝 Logged: Fatigue</h3>
-          <p>This drop in energy is a common rhythm of the luteal phase.</p>
+          <p>
+            <strong>You're not alone</strong>—this energy dip is a common
+            biological rhythm of the luteal phase. Take it slow.
+          </p>
         </div>
 
         <div class="privacy-card">
           <h3>🛡️ Data Governance</h3>
           <div class="control-group">
-            <label class="control-label">Local Data Auto-Expiration</label>
+            <label class="control-label">Local Data Life-cycle</label>
             <input type="range" min="1" max="4" value="2" class="slider" />
             <div class="slider-labels">
-              <span>48h</span>
-              <span>7d</span>
-              <span>30d</span>
-              <span>Forever</span>
+              <span>48h</span><span>7d</span><span>30d</span
+              ><span>Forever</span>
             </div>
           </div>
           <div class="sync-row">
-            <span class="sync-text">Import Health Ecosystem Data</span>
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider-toggle"></span>
-            </label>
+            <span style="font-size: 12px; color: #444; font-weight: 500"
+              >Ecosystem Integration (Optional)</span
+            >
+            <label class="switch"
+              ><input type="checkbox" /><span class="slider-toggle"></span
+            ></label>
           </div>
           <p style="font-size: 9px; color: #aaa; margin: 0">
-            Cross-referencing device data enhances the accuracy of your personal
-            forecasts.
+            Syncing wearable data provides more biological evidence to refine
+            your unique range.
           </p>
-          <a
-            href="#"
-            class="btn-delete"
-            onclick="alert('Confirm full data wipe?')"
-            >Wipe Local Storage (2 Clicks)</a
-          >
         </div>
       </div>
 
@@ -574,32 +434,53 @@
 
       <div class="overlay" id="overlay" onclick="closeSheet()">
         <div class="sheet" id="sheet" onclick="event.stopPropagation()">
-          <div class="sheet-header">
-            <h3>Quick Log</h3>
-            <span class="close-sheet" onclick="closeSheet()">✕</span>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 15px;
+            "
+          >
+            <h3 style="margin: 0; font-size: 20px; font-weight: 800">
+              Quick Log
+            </h3>
+            <span
+              onclick="closeSheet()"
+              style="cursor: pointer; color: #ccc; font-size: 20px"
+              >✕</span
+            >
           </div>
-
-          <div class="transparency-note">
-            <strong>Why log?</strong> Sharing your daily state helps our
-            <strong>Honesty</strong> model better account for stress and
-            biological variability. Data remains local.
-          </div>
-
-          <div class="log-grid">
-            <div class="log-item" onclick="logDone('Period')">
-              <span class="emoji">🩸</span
-              ><span class="label-text">Period</span>
+          <p style="font-size: 12px; color: #888; margin-bottom: 24px">
+            Sharing your daily state helps us be more
+            <strong>Honest</strong> about your cycle's uncertainty.
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+            <div
+              style="
+                background: #f9f9f9;
+                padding: 16px;
+                border-radius: 16px;
+                text-align: center;
+                cursor: pointer;
+                font-weight: 700;
+              "
+              onclick="closeSheet()"
+            >
+              🩸 Period
             </div>
-            <div class="log-item" onclick="logDone('Energy')">
-              <span class="emoji">⚡</span
-              ><span class="label-text">Energy</span>
-            </div>
-            <div class="log-item" onclick="logDone('Mood')">
-              <span class="emoji">😊</span><span class="label-text">Mood</span>
-            </div>
-            <div class="log-item" onclick="logDone('Symptoms')">
-              <span class="emoji">📝</span
-              ><span class="label-text">Symptoms</span>
+            <div
+              style="
+                background: #f9f9f9;
+                padding: 16px;
+                border-radius: 16px;
+                text-align: center;
+                cursor: pointer;
+                font-weight: 700;
+              "
+              onclick="closeSheet()"
+            >
+              ⚡ Energy
             </div>
           </div>
         </div>
@@ -620,22 +501,18 @@
 
     <script>
       function openSheet() {
-        const overlay = document.getElementById("overlay");
-        const sheet = document.getElementById("sheet");
-        overlay.style.display = "block";
-        setTimeout(() => sheet.classList.add("active"), 10);
+        document.getElementById("overlay").style.display = "block";
+        setTimeout(
+          () => document.getElementById("sheet").classList.add("active"),
+          10,
+        );
       }
-
       function closeSheet() {
-        const overlay = document.getElementById("overlay");
-        const sheet = document.getElementById("sheet");
-        sheet.classList.remove("active");
-        setTimeout(() => (overlay.style.display = "none"), 300);
-      }
-
-      function logDone(type) {
-        alert(type + " logged locally. Accountability updated.");
-        closeSheet();
+        document.getElementById("sheet").classList.remove("active");
+        setTimeout(
+          () => (document.getElementById("overlay").style.display = "none"),
+          300,
+        );
       }
     </script>
   </body>
