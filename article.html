@@ -170,25 +170,37 @@
         border-left: 3px solid #ff6b8b;
       }
 
+      /* --- 统一的全局导航栏样式 --- */
       .nav {
         display: flex;
         justify-content: space-around;
-        padding: 12px 16px 25px;
-        border-top: 1px solid #eee;
+        padding: 12px 16px 25px 16px; /* 底部预留 25px 适配手机手势条 */
+        border-top: 1px solid rgba(235, 235, 245, 0.8);
         background: #ffffff;
+        z-index: 10;
       }
       .nav a {
         text-decoration: none;
         color: #bbb;
         font-size: 10px;
-        font-weight: 600;
+        font-weight: 700;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 4px;
+        transition: all 0.2s ease;
       }
       .nav a.active {
         color: #ff6b8b;
+      }
+      .nav a .icon {
+        font-size: 22px; /* 统一图标大小 */
+        margin-bottom: 2px;
+        filter: grayscale(100%) opacity(0.5); /* 非活动状态置灰 */
+      }
+      .nav a.active .icon {
+        filter: none; /* 活动状态恢复颜色 */
+        opacity: 1;
       }
     </style>
   </head>
